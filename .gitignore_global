@@ -1,0 +1,10 @@
+*~
+.DS_Store
+.ruby-version
+.tern-port
+coffeelint.json
+tags
+.byebug_history
+.tern-project
+.vscode
+.editorconfig

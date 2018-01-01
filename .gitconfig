@@ -1,0 +1,39 @@
+[core]
+	excludesfile = /Users/satotoru/.gitignore_global
+	editor = vim
+[alias]
+	co = checkout
+	st = status
+  graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+  b = branch
+  ad = add
+  logs = log --stat
+  logo = log --oneline
+  logp = log -p
+  overwrite = push --force-with-lease
+  ow = overwrite
+  shows = show --stat
+  diffc = diff --cached
+  comparemaster = compare master...release
+  releasetomaster =  pull-request -m 'release to master' -h release -b master
+[user]
+	name = satotoru
+	email = satotoru2000@gmail.com
+[diff]
+	tool = vimdiff
+  renames = true
+[difftool]
+	prompt = false
+[merge]
+	tool = gvimdiff
+[mergetool]
+	prompt = false
+  keepBackup = false
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[push]
+	default = simple
