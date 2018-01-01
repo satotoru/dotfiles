@@ -33,6 +33,9 @@ function git
 end
 
 # alias
+## common
+alias be 'bundle exec'
+## git
 alias g 'git'
 alias gb 'git branch'
 alias gco 'git checkout'
