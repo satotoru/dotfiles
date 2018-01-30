@@ -19,3 +19,6 @@
 [submodule ".vim/pack/plugins/start/tsuquyomi"]
 	path = .vim/pack/plugins/start/tsuquyomi
 	url = git@github.com:Quramy/tsuquyomi.git
+[submodule ".vim/pack/plugins/start/emmet-vim"]
+	path = .vim/pack/plugins/start/emmet-vim
+	url = git@github.com:mattn/emmet-vim.git
