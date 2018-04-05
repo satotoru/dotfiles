@@ -22,7 +22,12 @@ set -x PATH $GOROOT/bin $PATH
 set -x PATH $GOPATH/bin $PATH
 
 ## Java setting
-set -x JAVA_HOME `/usr/libexec/java_home`
+set -x JAVA_HOME ( /usr/libexec/java_home -v "1.8" )
+set -x PATH $JAVA_HOME/bin $PATH
+
+## Android setting
+set -x ANDROID_HOME /Users/satotoru/Library/Android/sdk
+set -x PATH ~/Library/Android/sdk/platform-tools $PATH
 
 ## postgres setting
 set -x PGDATA /usr/local/var/postgres
