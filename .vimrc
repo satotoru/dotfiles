@@ -57,3 +57,6 @@ let g:js_indent_typescript = 1
 " disable folding javascript
 function! JavaScriptFold()
 endfunction
+
+" Emmet
+let g:user_emmet_leader_key='<C-D>'
