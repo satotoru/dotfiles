@@ -25,3 +25,6 @@
 [submodule ".vim/pack/plugins/start/vim-easy-align"]
 	path = .vim/pack/plugins/start/vim-easy-align
 	url = git@github.com:junegunn/vim-easy-align.git
+[submodule ".vim/pack/plugins/start/vim-go"]
+	path = .vim/pack/plugins/start/vim-go
+	url = git@github.com:fatih/vim-go.git
