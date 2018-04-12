@@ -66,7 +66,9 @@ let g:user_emmet_leader_key='<C-D>'
 
 " Ack
 let g:ackprg = 'ag --vimgrep'
+nmap <leader>a :Ag<CR>
 
 " fzf
 set rtp+=/usr/local/opt/fzf
-
+nmap <leader>f :Files<CR>
+nmap <leader>b :Buffers<CR>
