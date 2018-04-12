@@ -38,7 +38,7 @@ function git
 end
 
 # fzf setting
-set -x FZF_DEFAULT_COMMAND='ag'
+set -x FZF_DEFAULT_COMMAND 'ag --nocolor -g ""'
 
 # alias
 ## common
