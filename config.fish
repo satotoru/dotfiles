@@ -37,6 +37,9 @@ function git
   hub $argv
 end
 
+# fzf setting
+set -x FZF_DEFAULT_COMMAND='ag'
+
 # alias
 ## common
 alias be 'bundle exec'

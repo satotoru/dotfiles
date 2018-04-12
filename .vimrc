@@ -19,7 +19,7 @@ set clipboard+=unnamed
 set number
 
 " GUI font size
-set guifont=Source\ Code\ Pro:h10
+set guifont=Source\ Code\ Pro\ for\ Powerline:h10
 
 " Ex wild mode
 set wildmode=list:longest,full
@@ -66,3 +66,7 @@ let g:user_emmet_leader_key='<C-D>'
 
 " Ack
 let g:ackprg = 'ag --vimgrep'
+
+" fzf
+set rtp+=/usr/local/opt/fzf
+
