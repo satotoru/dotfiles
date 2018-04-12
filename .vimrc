@@ -1,5 +1,8 @@
 runtime! userautoload/*.vim
 
+" シェルに出力しない
+set shellpipe=>
+
 " 1 tab == 2 spaces
 set shiftwidth=2
 set tabstop=2
@@ -60,3 +63,6 @@ endfunction
 
 " Emmet
 let g:user_emmet_leader_key='<C-D>'
+
+" Ack
+let g:ackprg = 'ag --vimgrep'
