@@ -34,3 +34,6 @@
 [submodule ".vim/pack/plugins/start/--force"]
 	path = .vim/pack/plugins/start/--force
 	url = git@github.com:Quramy/tsuquyomi.git
+[submodule ".vim/pack/plugins/start/jedi-vim"]
+	path = .vim/pack/plugins/start/jedi-vim
+	url = git@github.com:davidhalter/jedi-vim.git
