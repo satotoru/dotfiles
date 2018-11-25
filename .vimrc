@@ -65,13 +65,20 @@ endfunction
 let g:user_emmet_leader_key='<C-D>'
 
 " Ack
-let g:ackprg = 'ag --vimgrep'
-nmap <leader>a :Ag<CR>
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " fzf
 set rtp+=/usr/local/opt/fzf
-nmap <leader>f :Files<CR>
-nmap <leader>b :Buffers<CR>
+function! RunAg()
+  let name = input('Keyword: ')
+  execute 'Ag ' . name
+endfunction
+
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>: :Commands<CR>
+nnoremap <leader>g :BCommits<CR>
+nnoremap <leader>a :call RunAg()<CR>
 
 " Prettier
 let g:prettier#autoformat = 0
