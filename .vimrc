@@ -27,6 +27,9 @@ set wildmode=list:longest,full
 " updatetime
 set updatetime=200
 
+" QuickFixでtabを開かないように設定上書き
+set switchbuf=useopen
+
 " highlighting ejs files
 au BufNewFile,BufRead *.ejs set filetype=html
 
