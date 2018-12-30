@@ -40,6 +40,9 @@ end
 # fzf setting
 set -x FZF_DEFAULT_COMMAND 'ag --nocolor -g ""'
 
+# bobthefish settings
+set -g theme_display_k8s_context no
+
 # alias
 ## common
 alias be 'bundle exec'
@@ -54,3 +57,10 @@ alias gp 'git push'
 alias gst 'git status'
 alias gwip 'git add -A; git rm (git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
 alias clear '/usr/bin/clear'
+# docker
+alias dki 'docker container run --rm -i -t -P'
+alias dkd 'docker container run -d -P'
+alias dex="docker container exec -i -t"
+alias dc="docker-compose"
+alias dce="docker-compose exec"
+alias dcr="docker-compose run"
