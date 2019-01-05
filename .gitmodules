@@ -52,3 +52,6 @@
 [submodule ".vim/pack/plugins/start/vim-tags"]
 	path = .vim/pack/plugins/start/vim-tags
 	url = git@github.com:szw/vim-tags.git
+[submodule ".vim/pack/plugins/start/tsuquyomi"]
+	path = .vim/pack/plugins/start/tsuquyomi
+	url = git@github.com:Quramy/tsuquyomi.git
