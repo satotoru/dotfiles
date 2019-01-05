@@ -60,3 +60,6 @@ alias dex="docker container exec -i -t"
 alias dc="docker-compose"
 alias dce="docker-compose exec"
 alias dcr="docker-compose run"
+# ghq
+alias repos 'ghq list -p | fzf'
+alias repo 'cd (repos)'
