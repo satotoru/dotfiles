@@ -56,10 +56,10 @@ alias clear '/usr/bin/clear'
 # docker
 alias dki 'docker container run --rm -i -t -P'
 alias dkd 'docker container run -d -P'
-alias dex="docker container exec -i -t"
-alias dc="docker-compose"
-alias dce="docker-compose exec"
-alias dcr="docker-compose run"
+alias dex "docker container exec -i -t"
+alias dc "docker-compose"
+alias dce "docker-compose exec"
+alias dcr "docker-compose run"
 # ghq
 alias repos 'ghq list -p | fzf'
 alias repo 'cd (repos)'
