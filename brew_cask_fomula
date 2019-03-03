@@ -6,6 +6,7 @@ docker
 dropbox
 firefox
 fujitsu-scansnap-manager-ix500
+font-ricty-diminished
 google-backup-and-sync
 google-chrome
 google-japanese-ime
@@ -13,13 +14,15 @@ gyazo
 java
 karabiner-elements
 kindle
+macvim
 microsoft-office
 mysqlworkbench
 onedrive
 slack
 station
+table-tool
 transmission
-vagrant
+tunnelblick
 virtualbox
 visual-studio-code
 zoomus
