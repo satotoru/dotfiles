@@ -23,7 +23,12 @@ set -x PATH $GOPATH/bin $PATH
 
 ## Android setting
 set -x ANDROID_HOME /Users/satotoru/Library/Android/sdk
+set -x JAVA_HOME (/usr/libexec/java_home -v 1.8)
 set -x PATH ~/Library/Android/sdk/platform-tools $PATH
+set -x PATH '/Applications/Android Studio.app/Contents/gradle/gradle-4.10.1/bin' $PATH
+
+## openssl setting
+set -x PATH '/usr/local/opt/openssl/bin' $PATH
 
 ## postgres setting
 set -x PGDATA /usr/local/var/postgres
