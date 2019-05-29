@@ -115,6 +115,8 @@ let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 " ALE
+let g:ale_cache_executable_check_failures = 1
 let g:ale_fixers = {
       \   'ruby': ['rubocop'],
+      \   'typescript': ['tslint'],
       \}
