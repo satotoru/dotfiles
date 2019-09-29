@@ -110,10 +110,6 @@ nnoremap <leader>g :BCommits<CR>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>a :call RunAg()<CR>
 
-" Prettier
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
-
 " ALE
 let g:ale_cache_executable_check_failures = 1
 let g:ale_fixers = {
