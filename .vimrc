@@ -89,6 +89,10 @@ let g:js_indent_typescript = 1
 function! JavaScriptFold()
 endfunction
 
+" JSONの""を隠す機能無効化
+set conceallevel=0
+let g:vim_json_syntax_conceal = 0
+
 " Emmet
 let g:user_emmet_leader_key='<C-D>'
 
