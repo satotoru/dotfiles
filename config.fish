@@ -1,15 +1,5 @@
 set -x LC_CTYPE ja_JP.UTF-8
-
-## rbenv setting
-set -x PATH /Users/satotoru/.rbenv/shims $PATH
-
-## pyenv
-set -x PYENV_ROOT $HOME/.pyenv
-set -x PATH $PYENV_ROOT/shims $PATH
-status --is-interactive; and source (pyenv init -|psub)
-
-## nodebrew
-set -x PATH $HOME/.nodebrew/current/bin $PATH
+set -x LC_ALL ja_JP.UTF-8
 
 ## editor setting
 set -x EDITOR 'vim'
@@ -21,14 +11,11 @@ set -x GOPATH $HOME/workspace/go
 set -x PATH $GOROOT/bin $PATH
 set -x PATH $GOPATH/bin $PATH
 
-## Android setting
-set -x ANDROID_HOME /Users/satotoru/Library/Android/sdk
-set -x JAVA_HOME (/usr/libexec/java_home -v 1.8)
-set -x PATH ~/Library/Android/sdk/platform-tools $PATH
-set -x PATH '/Applications/Android Studio.app/Contents/gradle/gradle-4.10.1/bin' $PATH
-
 ## openssl setting
 set -x PATH '/usr/local/opt/openssl/bin' $PATH
+
+# python settings
+set -x PATH '/Users/satotoru/Library/Python/3.7/bin' $PATH
 
 ## postgres setting
 set -x PGDATA /usr/local/var/postgres
