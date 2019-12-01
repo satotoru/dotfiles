@@ -101,7 +101,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 nnoremap <leader>* :Ack! "\b<cword>\b" <CR>
 
 " fzf
-set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf
 function! RunAg()
   let name = input('Keyword: ')
   execute 'Ag ' . name
