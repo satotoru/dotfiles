@@ -53,11 +53,6 @@ set switchbuf=useopen
 " highlighting ejs files
 au BufNewFile,BufRead *.ejs set filetype=html
 
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
 " vim indent guide on startup
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
@@ -88,6 +83,11 @@ let g:js_indent_typescript = 1
 " disable folding javascript
 function! JavaScriptFold()
 endfunction
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 " JSONの""を隠す機能無効化
 set conceallevel=0
@@ -120,3 +120,30 @@ let g:ale_fixers = {
       \   'ruby': ['rubocop'],
       \   'typescript': ['tslint'],
       \}
+
+" LSP Java
+if executable('java') && filereadable(expand('~/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.5.600.v20191014-2022.jar'))
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'eclipse.jdt.ls',
+        \ 'cmd': {server_info->[
+        \     'java',
+        \     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+        \     '-Dosgi.bundles.defaultStartLevel=4',
+        \     '-Declipse.product=org.eclipse.jdt.ls.core.product',
+        \     '-Dlog.level=ALL',
+        \     '-noverify',
+        \     '-Dfile.encoding=UTF-8',
+        \     '-Xmx1G',
+        \     '-jar',
+        \     expand('~/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.5.600.v20191014-2022.jar'),
+        \     '-configuration',
+        \     expand('~/lsp/eclipse.jdt.ls/config_mac'),
+        \     '-data',
+        \     getcwd()
+        \ ]},
+        \ 'whitelist': ['java'],
+        \ })
+endif
+
+" Java
+autocmd FileType java setlocal omnifunc=lsp#complete
