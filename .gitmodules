@@ -61,3 +61,6 @@
 [submodule ".vim/pack/plugins/start/vim-lsp"]
 	path = .vim/pack/plugins/start/vim-lsp
 	url = git@github.com:prabirshrestha/vim-lsp.git
+[submodule ".vim/pack/plugins/start/vim-slim"]
+	path = .vim/pack/plugins/start/vim-slim
+	url = git@github.com:slim-template/vim-slim.git
