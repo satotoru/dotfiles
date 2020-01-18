@@ -20,11 +20,6 @@ set -x PATH '/Users/satotoru/Library/Python/3.7/bin' $PATH
 ## postgres setting
 set -x PGDATA /usr/local/var/postgres
 
-# hub setting
-function git
-  hub $argv
-end
-
 # fzf setting
 set -x FZF_DEFAULT_COMMAND 'ag --nocolor -g ""'
 
