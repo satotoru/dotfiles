@@ -64,3 +64,6 @@
 [submodule ".vim/pack/plugins/start/vim-slim"]
 	path = .vim/pack/plugins/start/vim-slim
 	url = git@github.com:slim-template/vim-slim.git
+[submodule "linux/.config/awesome/vicious"]
+	path = linux/.config/awesome/vicious
+	url = git@github.com:vicious-widgets/vicious.git
