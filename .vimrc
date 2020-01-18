@@ -13,7 +13,8 @@ if has("gui_running")
 endif
 
 " enable clipboard
-set clipboard+=unnamed
+" set clipboard+=unnamed
+set clipboard+=unnamedplus
 
 " 行番号の表示
 set number
