@@ -57,8 +57,8 @@ xset r rate 200 30
 
 fcitx &
 xbindkeys &
-binput-gestures-setup start &
+libinput-gestures-setup start &
+dropbox &
 xscreensaver &
 albert &
-syndaemon -i 0.8 -t -k &
 exec awesome
