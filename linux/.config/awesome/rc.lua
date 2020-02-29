@@ -71,14 +71,14 @@ awful.layout.layouts = {
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral,
+    -- awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.max,
+    -- awful.layout.suit.max.fullscreen,
+    -- awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -86,7 +86,11 @@ awful.layout.layouts = {
 
 -- Naughty Configuration
 for key, value in pairs({ naughty.config.presets.low, naughty.config.presets.normal, naughty.config.presets.critical }) do
-  value.icon_size = 48
+  value.icon_size = 24
+  value.width = 240
+  value.height = 100
+  value.timeout = 10
+  value.run = function(n) n.die(naughty.notification_closed_reason.dismissedByUser) end
 end
 
 -- }}}
@@ -589,6 +593,15 @@ end)
 -- client.connect_signal("mouse::enter", function(c)
 --     c:emit_signal("request::activate", "mouse_enter", {raise = false})
 -- end)
+
+-- アクティブになったときにそのタグに移動する
+client.connect_signal("request::activate", function(c)
+  if not c:isvisible() then
+    c.first_tag:view_only()
+  end
+  client.focus = c
+  c:raise()
+end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
