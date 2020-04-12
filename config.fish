@@ -5,26 +5,26 @@ set -x LC_ALL ja_JP.UTF-8
 set -x EDITOR 'vim'
 set -x VIM_APP_DIR $HOME/Applications
 
-## go setting
-set -x GOROOT /usr/local/opt/go/libexec
-set -x GOPATH $HOME/workspace/go
-set -x PATH $GOROOT/bin $PATH
-set -x PATH $GOPATH/bin $PATH
 
-## openssl setting
-set -x PATH '/usr/local/opt/openssl/bin' $PATH
-
-# python settings
-set -x PATH '/Users/satotoru/Library/Python/3.7/bin' $PATH
-
-## postgres setting
-set -x PGDATA /usr/local/var/postgres
+## Mac Settings
+if [ (uname -a | grep Darwin | wc -l) -gt 0 ]
+  ## go setting
+  if [ (which go |  wc -l) -gt 0 ]
+    set -x GOROOT /usr/local/opt/go/libexec
+    set -x GOPATH $HOME/workspace/go
+    set -x PATH $GOROOT/bin $PATH
+    set -x PATH $GOPATH/bin $PATH
+  end
+  ## openssl setting
+  set -x PATH '/usr/local/opt/openssl/bin' $PATH
+  # python settings
+  if [ (which python |  wc -l) -gt 0 ]
+    set -x PATH '/Users/satotoru/Library/Python/3.7/bin' $PATH
+  end
+end
 
 # fzf setting
 set -x FZF_DEFAULT_COMMAND 'ag --nocolor -g ""'
-
-# bobthefish settings
-set -g theme_display_k8s_context no
 
 # alias
 ## common
@@ -51,3 +51,8 @@ alias dcr "docker-compose run"
 # ghq
 alias repos 'ghq list -p | fzf'
 alias repo 'cd (repos)'
+
+# WSL only alias
+if [ (uname -a | grep microsoft | wc -l) -gt 0 ]
+  alias open 'explorer.exe'
+end

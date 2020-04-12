@@ -12,6 +12,19 @@ if has("gui_running")
   set macmeta
 endif
 
+" Windows Subsystem for Linux
+if system('uname -a | grep microsoft') != ''
+  " ヤンクでクリップボードにコピー
+  augroup myYank
+    autocmd!
+    autocmd TextYankPost * :call system('clip.exe', @")
+  augroup END
+
+  " カーソル設定
+  let &t_SI="\<CSI>5 q"
+  let &t_EI="\<CSI>1 q"
+endif
+
 " enable clipboard
 " set clipboard+=unnamed
 set clipboard+=unnamedplus
