@@ -29,6 +29,7 @@ set -x FZF_DEFAULT_COMMAND 'ag --nocolor -g ""'
 # alias
 ## common
 alias be 'bundle exec'
+alias today 'date +"%Y-%m-%d"'
 ## git
 alias g 'git'
 alias gb 'git branch'
