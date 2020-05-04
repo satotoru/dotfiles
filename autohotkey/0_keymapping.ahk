@@ -8,7 +8,7 @@
 #UseHook
 
 ; The following line is a contribution of NTEmacs wiki http://www49.atwiki.jp/ntemacs/pages/20.html
-SetKeyDelay 0
+SetKeyDelay, 0
 
 ; emacsキーバインドを無効にしたいアプリケーション
 ; (Please comment out applications you don't use)
@@ -91,6 +91,13 @@ backward_char()
   Send {Left}
   Return
 }
+kill_line()
+{
+  Send {ShiftDown}{END}{SHIFTUP}
+  Sleep 50 ;[ms] this value depends on your environment
+  Send ^x
+  Return
+}
 yank()
 {
   Send ^v
@@ -110,17 +117,17 @@ F13::RCtrl
 
 ;; カーソル移動
 
->^f::
-  If is_target()
-    Send {%A_ThisHotkey%}
-  Else
-    forward_char()
-  Return
 >^b::
   If is_target()
     Send {%A_ThisHotkey%}
   Else
     backward_char()
+  Return
+>^f::
+  If is_target()
+    Send {%A_ThisHotkey%}
+  Else
+    forward_char()
   Return
 >^p::
   If is_target()
@@ -134,6 +141,55 @@ F13::RCtrl
   Else
     next_line()
   Return
+!>^b::
+  If is_target()
+    Send {%A_ThisHotkey%}
+  Else
+    Send !{Left}
+  Return
+!>^f::
+  If is_target()
+    Send {%A_ThisHotkey%}
+  Else
+    Send !{Right}
+  Return
+!>^p::
+  If is_target()
+    Send {%A_ThisHotkey%}
+  Else
+    Send !{Up}
+  Return
+!>^n::
+  If is_target()
+    Send {%A_ThisHotkey%}
+  Else
+    Send !{Down}
+  Return
++>^b::
+  If is_target()
+    Send {%A_ThisHotkey%}
+  Else
+    Send +{Left}
+  Return
++>^f::
+  If is_target()
+    Send {%A_ThisHotkey%}
+  Else
+    Send +{Right}
+  Return
++>^p::
+  If is_target()
+    Send {%A_ThisHotkey%}
+  Else
+    Send +{Up}
+  Return
++>^n::
+  If is_target()
+    Send {%A_ThisHotkey%}
+  Else
+    Send +{Down}
+  Return
+
 >^a::
   If is_target()
     Send {%A_ThisHotkey%}
@@ -159,6 +215,20 @@ F13::RCtrl
     Send {%A_ThisHotkey%}
   Else
     delete_backward_char()
+  Return
+
+;; kill/yank
+>^k::
+  If is_target()
+    Send {%A_ThisHotkey%}
+  Else
+    kill_line()
+  Return
+>^y::
+  If is_target()
+    Send {%A_ThisHotkey%}
+  Else
+    yank()
   Return
 
 ;; esc
