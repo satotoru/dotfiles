@@ -35,6 +35,10 @@ set number
 " GUI font size
 set guifont=Source\ Code\ Pro\ for\ Powerline:h10
 
+" colorscheme
+colorscheme solarized
+
+
 " Terminal Color
 let g:terminal_ansi_colors = [
 \ '#073642',
@@ -91,6 +95,9 @@ cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+
+" Shift+tabで逆インデント
+inoremap <S-Tab> <C-d>
 
 " js indent
 let g:js_indent_typescript = 1
