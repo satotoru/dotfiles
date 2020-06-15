@@ -27,6 +27,14 @@ def configure(keymap):
     # Key Swap
     keymap.replaceKey(VK_F13, "RCtrl")
 
+    # ime
+    def ime_toggle():
+        status = keymap.wnd.getImeStatus()
+        keymap.wnd.setImeStatus(not status)
+
+    ime_keymap = keymap.defineWindowKeymap()
+    ime_keymap["LAlt-Space"] = ime_toggle
+
     # Emacs Bindings
     # 左右どちらの Ctrlキーを使うかを指定する（"L": 左、"R": 右）
     side_of_ctrl_key = "R"
