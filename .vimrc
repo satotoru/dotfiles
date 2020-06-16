@@ -131,6 +131,7 @@ endfunction
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>: :Commands<CR>
+nnoremap <leader>P :Commands<CR>
 nnoremap <leader>g :BCommits<CR>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>a :call RunAg()<CR>
@@ -142,29 +143,8 @@ let g:ale_fixers = {
       \   'typescript': ['tslint'],
       \}
 
-" LSP Java
-if executable('java') && filereadable(expand('~/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.5.600.v20191014-2022.jar'))
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'eclipse.jdt.ls',
-        \ 'cmd': {server_info->[
-        \     'java',
-        \     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-        \     '-Dosgi.bundles.defaultStartLevel=4',
-        \     '-Declipse.product=org.eclipse.jdt.ls.core.product',
-        \     '-Dlog.level=ALL',
-        \     '-noverify',
-        \     '-Dfile.encoding=UTF-8',
-        \     '-Xmx1G',
-        \     '-jar',
-        \     expand('~/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.5.600.v20191014-2022.jar'),
-        \     '-configuration',
-        \     expand('~/lsp/eclipse.jdt.ls/config_mac'),
-        \     '-data',
-        \     getcwd()
-        \ ]},
-        \ 'whitelist': ['java'],
-        \ })
-endif
-
-" Java
+" LSP
 autocmd FileType java setlocal omnifunc=lsp#complete
+autocmd FileType ruby setlocal omnifunc=lsp#complete
+
+nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
