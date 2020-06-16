@@ -70,3 +70,6 @@
 [submodule ".vim/pack/plugins/start/vim-colors-solarized"]
 	path = .vim/pack/plugins/start/vim-colors-solarized
 	url = git@github.com:altercation/vim-colors-solarized.git
+[submodule ".vim/pack/plugins/start/vim-lsp-settings"]
+	path = .vim/pack/plugins/start/vim-lsp-settings
+	url = git@github.com:mattn/vim-lsp-settings.git
