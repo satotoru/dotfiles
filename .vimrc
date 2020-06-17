@@ -148,3 +148,6 @@ autocmd FileType java setlocal omnifunc=lsp#complete
 autocmd FileType ruby setlocal omnifunc=lsp#complete
 
 nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
+
+" PlantUML
+au FileType plantuml command! OpenUml :!open -a Google\ Chrome %

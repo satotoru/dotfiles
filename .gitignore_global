@@ -8,3 +8,5 @@ tags
 .tern-project
 .vscode
 .editorconfig
+.idea
+.generators
