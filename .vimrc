@@ -3,10 +3,6 @@ runtime! userautoload/*.vim
 " シェルに出力しない
 set shellpipe=>
 
-" 1 tab == 2 spaces
-set shiftwidth=2
-set tabstop=2
-
 " macmeta
 if has("gui_running")
   set macmeta
@@ -38,7 +34,6 @@ set guifont=Source\ Code\ Pro\ for\ Powerline:h10
 " colorscheme
 colorscheme solarized
 
-
 " Terminal Color
 let g:terminal_ansi_colors = [
 \ '#073642',
@@ -68,19 +63,10 @@ set updatetime=200
 " QuickFixでtabを開かないように設定上書き
 set switchbuf=useopen
 
-" highlighting ejs files
-au BufNewFile,BufRead *.ejs set filetype=html
-
 " vim indent guide on startup
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
-
-" go indent setting
-au BufNewFile,BufRead *.go set noexpandtab tabstop=4 shiftwidth=4
-
-" jsx highlighting
-au BufNewFile,BufRead *.js let g:jsx_ext_required = 0
 
 " remove witespaces at end of lines
 autocmd BufWritePre * :%s/\s\+$//ge
@@ -99,12 +85,6 @@ cnoremap <C-e> <End>
 " Shift+tabで逆インデント
 inoremap <S-Tab> <C-d>
 
-" js indent
-let g:js_indent_typescript = 1
-" disable folding javascript
-function! JavaScriptFold()
-endfunction
-
 " For conceal markers.
 if has('conceal')
   set conceallevel=2 concealcursor=niv
@@ -120,6 +100,7 @@ let g:user_emmet_leader_key='<C-D>'
 " Ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
 nnoremap <leader>* :Ack! "\b<cword>\b" <CR>
+vnoremap <leader>* :call VisualSelection('gv', '')<CR>
 
 " fzf
 set rtp+=~/.fzf
@@ -144,10 +125,4 @@ let g:ale_fixers = {
       \}
 
 " LSP
-autocmd FileType java setlocal omnifunc=lsp#complete
-autocmd FileType ruby setlocal omnifunc=lsp#complete
-
 nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
-
-" PlantUML
-au FileType plantuml command! OpenUml :!open -a Google\ Chrome %
