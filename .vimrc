@@ -126,3 +126,4 @@ let g:ale_fixers = {
 
 " LSP
 nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
+let g:lsp_text_edit_enabled = 0
