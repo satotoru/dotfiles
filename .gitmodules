@@ -31,9 +31,6 @@
 [submodule ".vim/pack/plugins/start/ale"]
 	path = .vim/pack/plugins/start/ale
 	url = git@github.com:w0rp/ale.git
-[submodule ".vim/pack/plugins/start/--force"]
-	path = .vim/pack/plugins/start/--force
-	url = git@github.com:Quramy/tsuquyomi.git
 [submodule ".vim/pack/plugins/start/jedi-vim"]
 	path = .vim/pack/plugins/start/jedi-vim
 	url = git@github.com:davidhalter/jedi-vim.git
@@ -49,9 +46,6 @@
 [submodule ".vim/pack/plugins/start/vim-tags"]
 	path = .vim/pack/plugins/start/vim-tags
 	url = git@github.com:szw/vim-tags.git
-[submodule ".vim/pack/plugins/start/tsuquyomi"]
-	path = .vim/pack/plugins/start/tsuquyomi
-	url = git@github.com:Quramy/tsuquyomi.git
 [submodule ".vim/pack/plugins/start/vim-rhubarb"]
 	path = .vim/pack/plugins/start/vim-rhubarb
 	url = git@github.com:tpope/vim-rhubarb.git
