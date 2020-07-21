@@ -28,9 +28,6 @@
 [submodule ".vim/pack/plugins/start/ale"]
 	path = .vim/pack/plugins/start/ale
 	url = git@github.com:w0rp/ale.git
-[submodule ".vim/pack/plugins/start/jedi-vim"]
-	path = .vim/pack/plugins/start/jedi-vim
-	url = git@github.com:davidhalter/jedi-vim.git
 [submodule ".vim/pack/plugins/start/vim-unimpaired"]
 	path = .vim/pack/plugins/start/vim-unimpaired
 	url = git@github.com:tpope/vim-unimpaired.git
