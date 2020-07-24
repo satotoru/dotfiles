@@ -61,6 +61,8 @@ au BufNewFile,BufRead *.ejs set filetype=html
 " => go section
 """""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.go set noexpandtab tabstop=4 shiftwidth=4
+au FileType go setlocal omnifunc=lsp#complete
+au BufWritePre *.go LspDocumentFormat
 
 """"""""""""""""""""""""""""""
 " => Shell section
