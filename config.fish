@@ -56,4 +56,5 @@ alias repo 'cd (repos)'
 # WSL only alias
 if [ (uname -a | grep microsoft | wc -l) -gt 0 ]
   alias open 'explorer.exe'
+  eval (direnv hook fish)
 end
