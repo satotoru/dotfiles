@@ -61,7 +61,6 @@ au BufNewFile,BufRead *.ejs set filetype=html
 " => go section
 """""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.go set noexpandtab tabstop=4 shiftwidth=4
-au FileType go setlocal omnifunc=lsp#complete
 au BufWritePre *.go LspDocumentFormat
 
 """"""""""""""""""""""""""""""
@@ -83,12 +82,10 @@ autocmd BufRead *.twig set syntax=html filetype=html
 """"""""""""""""""""""""""""""
 " => Ruby section
 """"""""""""""""""""""""""""""
-autocmd FileType ruby setlocal omnifunc=lsp#complete
 
 """"""""""""""""""""""""""""""
 " => Java section
 """"""""""""""""""""""""""""""
-autocmd FileType java setlocal omnifunc=lsp#complete
 
 """"""""""""""""""""""""""""""
 " => PlantUML section

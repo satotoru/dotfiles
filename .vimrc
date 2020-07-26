@@ -127,3 +127,25 @@ let g:ale_fixers = {
 " LSP
 nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
 let g:lsp_text_edit_enabled = 0
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nmap <buffer> <leader>ld <plug>(lsp-definition)
+  nmap <buffer> <leader>lr <plug>(lsp-references)
+  nmap <buffer> <leader>li <plug>(lsp-implementation)
+  nmap <buffer> <leader>lt <plug>(lsp-type-definition)
+  nmap <buffer> <leader>la <Plug>(lsp-code-action)
+  nmap <buffer> <leader>l[ <Plug>(lsp-previous-diagnostic)
+  nmap <buffer> <leader>l] <Plug>(lsp-next-diagnostic)
+  nmap <buffer> <leader>rn <plug>(lsp-rename)
+  nmap <buffer> K <plug>(lsp-hover)
+
+  " refer to doc to add more commands
+endfunction
+
+augroup lsp_install
+  au!
+  " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
