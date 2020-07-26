@@ -34,26 +34,6 @@ set guifont=Source\ Code\ Pro\ for\ Powerline:h10
 " colorscheme
 colorscheme solarized
 
-" Terminal Color
-let g:terminal_ansi_colors = [
-\ '#073642',
-\ '#dc322f',
-\ '#859900',
-\ '#b58900',
-\ '#268bd2',
-\ '#d33682',
-\ '#2aa198',
-\ '#eee8d5',
-\ '#002b36',
-\ '#cb4b16',
-\ '#586e75',
-\ '#657b83',
-\ '#839496',
-\ '#6c71c4',
-\ '#93a1a1',
-\ '#fdf6e3'
-\ ]
-
 " Ex wild mode
 set wildmode=list:longest,full
 
@@ -94,6 +74,47 @@ endif
 set conceallevel=0
 let g:vim_json_syntax_conceal = 0
 
+" Terminal
+function! TermOpen()
+  if empty(term_list())
+    execute "terminal ++close"
+  else
+    let bufnr = term_list()[0]
+    let winnr = bufwinnr(bufnr)
+    echo winnr
+    if winnr < 0
+      execute "sbuffer " . bufnr
+    else
+      execute winnr . "hide"
+    endif
+  endif
+endfunction
+command! TermOpen call TermOpen()
+command! TermNew execute "terminal++close"
+nnoremap <leader>t :call TermOpen()<CR>
+tnoremap <C-W>t <C-W>:call TermOpen()<CR>
+
+" Terminal Color
+let g:terminal_ansi_colors = [
+\ '#073642',
+\ '#dc322f',
+\ '#859900',
+\ '#b58900',
+\ '#268bd2',
+\ '#d33682',
+\ '#2aa198',
+\ '#eee8d5',
+\ '#002b36',
+\ '#cb4b16',
+\ '#586e75',
+\ '#657b83',
+\ '#839496',
+\ '#6c71c4',
+\ '#93a1a1',
+\ '#fdf6e3'
+\ ]
+
+
 " Emmet
 let g:user_emmet_leader_key='<C-D>'
 
@@ -114,7 +135,6 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>: :Commands<CR>
 nnoremap <leader>P :Commands<CR>
 nnoremap <leader>g :BCommits<CR>
-nnoremap <leader>t :Tags<CR>
 nnoremap <leader>a :call RunAg()<CR>
 
 " ALE
