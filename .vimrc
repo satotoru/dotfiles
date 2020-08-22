@@ -120,17 +120,19 @@ nnoremap <leader>a :call RunAg()<CR>
 let g:ale_cache_executable_check_failures = 1
 let g:ale_fixers = {
       \   'ruby': ['rubocop'],
-      \   'typescript': ['tslint'],
+      \   'typescript': ['eslint'],
       \}
 
 " LSP
-nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
 let g:lsp_text_edit_enabled = 0
+let g:lsp_diagnostics_echo_cursor = 1
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nmap <buffer> <C-]> <plug>(lsp-definition)
   nmap <buffer> <leader>ld <plug>(lsp-definition)
+  nmap <buffer> <leader>lf <plug>(lsp-document-format)
   nmap <buffer> <leader>lr <plug>(lsp-references)
   nmap <buffer> <leader>li <plug>(lsp-implementation)
   nmap <buffer> <leader>lt <plug>(lsp-type-definition)

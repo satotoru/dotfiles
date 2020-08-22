@@ -9,7 +9,6 @@ Plug 'mattn/emmet-vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf.vim'
-Plug 'w0rp/ale'
 Plug 'tpope/vim-unimpaired'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -22,5 +21,6 @@ Plug 'vicious-widgets/vicious'
 Plug 'altercation/vim-colors-solarized'
 Plug 'mattn/vim-lsp-settings'
 Plug 'aklt/plantuml-syntax'
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 call plug#end()
