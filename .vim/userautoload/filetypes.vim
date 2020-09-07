@@ -38,6 +38,9 @@ au FileType javascript inoremap <buffer> $f //--- PH<esc>FP2xi
 " jsx highlighting
 au BufNewFile,BufRead *.js let g:jsx_ext_required = 0
 
+" Auto Format
+au BufWritePre *.js LspDocumentFormat
+
 " TypeScript highlighting
 let g:js_indent_typescript = 1
 

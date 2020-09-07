@@ -122,6 +122,10 @@ def configure(keymap):
     def esc():
         self_insert_command("Esc")()
 
+    def esc_and_ime_off():
+        esc()
+        ime_switch(False)
+
     # 共通関数
 
     def self_insert_command(*keys):
@@ -150,6 +154,12 @@ def configure(keymap):
 
     # キーバインド設定
 
+    ## グローバル設定
+    ### esc
+    global_keymap = keymap.defineWindowKeymap()
+    define_key(global_keymap, "C-OpenBracket", esc_and_ime_off)
+
+    ## emacsライク設定
     keymap_emacs = keymap.defineWindowKeymap(check_func=is_emacs_target)
     ## 「カーソル移動」のキー設定
     define_key(keymap_emacs, "C-b", backward_char)
@@ -178,7 +188,4 @@ def configure(keymap):
     define_key(keymap_emacs, "C-d", delete_char)
     define_key(keymap_emacs, "C-k", kill_line)
     define_key(keymap_emacs, "C-y", yank)
-
-    ## esc
-    define_key(keymap_emacs, "C-OpenBracket", esc)
 
