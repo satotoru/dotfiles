@@ -235,7 +235,25 @@ map <leader>l :bnext<cr>
 map <leader>h :bprevious<cr>
 
 " Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+map <leader>cd :call CdAndSave()<CR>
+map <leader>bd :call CdLastDir()<CR>
+
+let s:lastdir = ""
+function! CdAndSave()
+  let s:lastdir = trim(execute("pwd"))
+  execute "cd %:p:h"
+  execute "pwd"
+endfunction
+
+function! CdLastDir()
+  if s:lastdir == ""
+    echo ""
+    return
+  endif
+  execute "cd " . s:lastdir
+  execute "pwd"
+  let s:lastdir = ""
+endfunction
 
 " Specify the behavior when switching between buffers
 try

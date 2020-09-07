@@ -106,7 +106,9 @@ vnoremap <leader>* :call VisualSelection('gv', '')<CR>
 set rtp+=~/.fzf
 function! RunAg()
   let name = input('Keyword: ')
-  execute 'Ag ' . name
+  if name != ""
+    execute 'Ag ' . name
+  endif
 endfunction
 
 nnoremap <leader>f :Files<CR>
@@ -115,13 +117,6 @@ nnoremap <leader>: :Commands<CR>
 nnoremap <leader>P :Commands<CR>
 nnoremap <leader>g :BCommits<CR>
 nnoremap <leader>a :call RunAg()<CR>
-
-" ALE
-let g:ale_cache_executable_check_failures = 1
-let g:ale_fixers = {
-      \   'ruby': ['rubocop'],
-      \   'typescript': ['eslint'],
-      \}
 
 " LSP
 let g:lsp_text_edit_enabled = 0
