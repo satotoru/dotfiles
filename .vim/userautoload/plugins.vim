@@ -25,5 +25,6 @@ Plug 'aklt/plantuml-syntax'
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'hashivim/vim-terraform'
 
 call plug#end()

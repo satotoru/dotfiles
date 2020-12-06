@@ -145,3 +145,7 @@ augroup lsp_install
   " call s:on_lsp_buffer_enabled only for languages that has the server registered.
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
+
+" vim-terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
