@@ -56,5 +56,6 @@ alias repo 'cd (repos)'
 # WSL only alias
 if [ (uname -a | grep microsoft | wc -l) -gt 0 ]
   alias open 'explorer.exe'
+  alias win_paste 'powershell.exe Get-Clipboard'
   eval (direnv hook fish)
 end

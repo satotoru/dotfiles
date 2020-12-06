@@ -16,6 +16,8 @@ if system('uname -a | grep microsoft') != ''
     autocmd TextYankPost * :call system('clip.exe', @")
   augroup END
 
+  command! Winpaste r !win_paste
+
   " カーソル設定
   let &t_SI="\<CSI>5 q"
   let &t_EI="\<CSI>1 q"
