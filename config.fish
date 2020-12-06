@@ -52,6 +52,9 @@ alias dcr "docker-compose run"
 # ghq
 alias repos 'ghq list -p | fzf'
 alias repo 'cd (repos)'
+alias start_dev_instance 'aws ec2 start-instances --instance-ids (aws ec2 describe-instances --filters "Name=tag-key,Values=Name" "Name=tag-value,Values=dev_home" --query "Reservations[*].Instances[*].[InstanceId]" --output text)'
+alias stop_dev_instance 'aws ec2 stop-instances --instance-ids (aws ec2 describe-instances --filters "Name=tag-key,Values=Name" "Name=tag-value,Values=dev_home" --query "Reservations[*].Instances[*].[InstanceId]" --output text)'
+
 
 # WSL only alias
 if [ (uname -a | grep microsoft | wc -l) -gt 0 ]
