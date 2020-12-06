@@ -85,6 +85,8 @@ autocmd BufRead *.twig set syntax=html filetype=html
 """"""""""""""""""""""""""""""
 " => Ruby section
 """"""""""""""""""""""""""""""
+" Auto Format
+autocmd BufWritePre *rb LspDocumentFormatSync
 
 """"""""""""""""""""""""""""""
 " => Java section
