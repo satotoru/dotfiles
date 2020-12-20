@@ -1,3 +1,8 @@
+if has('nvim')
+  set rtp^=/home/satotoru/.vim/
+  tnoremap <C-W><C-n> <C-\><C-n>
+endif
+
 runtime! userautoload/*.vim
 
 " シェルに出力しない
@@ -7,6 +12,7 @@ set shellpipe=>
 if has("gui_running")
   set macmeta
 endif
+
 
 " Windows Subsystem for Linux
 if system('uname -a | grep microsoft') != ''
@@ -34,7 +40,7 @@ set number
 set guifont=Source\ Code\ Pro\ for\ Powerline:h10
 
 " colorscheme
-colorscheme solarized
+colorscheme NeoSolarized
 
 " Ex wild mode
 set wildmode=list:longest,full

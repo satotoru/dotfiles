@@ -20,7 +20,7 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'slim-template/vim-slim'
 Plug 'vicious-widgets/vicious'
-Plug 'altercation/vim-colors-solarized'
+Plug 'overcache/NeoSolarized'
 Plug 'mattn/vim-lsp-settings'
 Plug 'aklt/plantuml-syntax'
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
