@@ -23,6 +23,11 @@ if [ (uname -a | grep Darwin | wc -l) -gt 0 ]
   end
 end
 
+# WSL Settings
+if [ (uname -a | grep microsoft | wc -l) -gt 0 ]
+  eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+end
+
 # fzf setting
 set -x FZF_DEFAULT_COMMAND 'ag --nocolor -g ""'
 
