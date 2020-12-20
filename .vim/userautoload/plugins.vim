@@ -27,5 +27,6 @@ Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'hashivim/vim-terraform'
+Plug 'jparise/vim-graphql'
 
 call plug#end()
