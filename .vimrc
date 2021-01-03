@@ -13,7 +13,6 @@ if has("gui_running")
   set macmeta
 endif
 
-
 " Windows Subsystem for Linux
 if system('uname -a | grep microsoft') != ''
   " ヤンクでクリップボードにコピー
@@ -58,6 +57,12 @@ let g:indent_guides_guide_size = 1
 
 " remove witespaces at end of lines
 autocmd BufWritePre * :%s/\s\+$//ge
+
+" => Status line
+"" Always show the status line
+set laststatus=2
+"" Format the status line
+set statusline=\ %{HasPaste()}%{FugitiveStatusline()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 " Emacs like keybindings
 imap <C-f> <Right>
