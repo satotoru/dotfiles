@@ -162,3 +162,15 @@ augroup END
 " vim-terraform
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
+
+" Goyo
+nnoremap <C-W>z :Goyo 100%x100%<CR>
+
+if has('vim_starting')
+    " 挿入モード時に非点滅の縦棒タイプのカーソル
+    let &t_SI .= "\e[6 q"
+    " ノーマルモード時に非点滅のブロックタイプのカーソル
+    let &t_EI .= "\e[2 q"
+    " 置換モード時に非点滅の下線タイプのカーソル
+    let &t_SR .= "\e[4 q"
+endif
