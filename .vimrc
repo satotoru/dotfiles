@@ -111,9 +111,6 @@ command! TermNew execute "terminal++close"
 nnoremap <leader>t :call TermOpen()<CR>
 tnoremap <C-W>t <C-W>:call TermOpen()<CR>
 
-" vim-plug
-let g:plug_url_format = "git@github.com:%s.git"
-
 " Emmet
 let g:user_emmet_leader_key='<C-D>'
 
