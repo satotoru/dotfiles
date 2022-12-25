@@ -110,9 +110,21 @@ command! TermOpen call TermOpen()
 command! TermNew execute "terminal++close"
 nnoremap <leader>t :call TermOpen()<CR>
 tnoremap <C-W>t <C-W>:call TermOpen()<CR>
+set termwinsize=15x0
 
 " Emmet
 let g:user_emmet_leader_key='<C-D>'
+
+let g:user_emmet_settings = {
+\  'variables': {'lang': 'ja'},
+\  "eruby": {
+\    "extends": "html",
+\    "snippets": {
+\     "erb:s": "<%| %>",
+\     "erb:m": "<%=| do %>\n${child}\n<% end %>"
+\   }
+\ }
+\}
 
 " Ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -170,6 +182,7 @@ let g:terraform_fmt_on_save=1
 " Goyo
 nnoremap <C-W>z :Goyo 100%x100%<CR>
 
+" Cursor
 if has('vim_starting')
     " 挿入モード時に非点滅の縦棒タイプのカーソル
     let &t_SI .= "\e[6 q"
@@ -178,3 +191,11 @@ if has('vim_starting')
     " 置換モード時に非点滅の下線タイプのカーソル
     let &t_SR .= "\e[4 q"
 endif
+
+" NerdTree
+autocmd VimEnter * NERDTree | wincmd p
+"" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <leader>nf :NERDTreeFind<CR>
+nnoremap <leader>nt :NERDTreeToggle<CR>
