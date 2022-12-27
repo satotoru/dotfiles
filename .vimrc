@@ -110,7 +110,9 @@ command! TermOpen call TermOpen()
 command! TermNew execute "terminal++close"
 nnoremap <leader>t :call TermOpen()<CR>
 tnoremap <C-W>t <C-W>:call TermOpen()<CR>
-set termwinsize=15x0
+if !has('nvim')
+  set termwinsize=15x0
+endif
 
 " Emmet
 let g:user_emmet_leader_key='<C-D>'
