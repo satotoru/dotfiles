@@ -3,11 +3,13 @@ set -x LC_ALL ja_JP.UTF-8
 
 ## editor setting
 set -x EDITOR 'vim'
-set -x VIM_APP_DIR $HOME/Applications
-
 
 ## Mac Settings
 if [ (uname -a | grep Darwin | wc -l) -gt 0 ]
+
+  ## VIM_APP_DIR
+  set -x VIM_APP_DIR $HOME/Applications
+
   ## go setting
   if [ (which go |  wc -l) -gt 0 ]
     set -x GOROOT /usr/local/opt/go/libexec
@@ -15,8 +17,10 @@ if [ (uname -a | grep Darwin | wc -l) -gt 0 ]
     set -x PATH $GOROOT/bin $PATH
     set -x PATH $GOPATH/bin $PATH
   end
+
   ## openssl setting
   set -x PATH '/usr/local/opt/openssl/bin' $PATH
+
   # python settings
   if [ (which python |  wc -l) -gt 0 ]
     set -x PATH '/Users/satotoru/Library/Python/3.7/bin' $PATH
@@ -26,6 +30,11 @@ end
 # WSL Settings
 if [ (uname -a | grep microsoft | wc -l) -gt 0 ]
   eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+  # cargo(rust) settings
+  if [ (which cargo |  wc -l) -gt 0 ]
+    set -x PATH '/home/satotoru/.cargo/bin' $PATH
+  end
 end
 
 # fzf setting
