@@ -35,6 +35,9 @@ if [ (uname -a | grep microsoft | wc -l) -gt 0 ]
   if [ (which cargo |  wc -l) -gt 0 ]
     set -x PATH '/home/satotoru/.cargo/bin' $PATH
   end
+
+  # haskell settings
+  set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/satotoru/.ghcup/bin # ghcup-env
 end
 
 # fzf setting
