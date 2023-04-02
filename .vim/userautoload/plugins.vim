@@ -25,5 +25,6 @@ Plug 'aklt/plantuml-syntax'
 Plug 'hashivim/vim-terraform'
 Plug 'jparise/vim-graphql'
 Plug 'dag/vim-fish'
+Plug 'github/copilot.vim'
 
 call plug#end()
