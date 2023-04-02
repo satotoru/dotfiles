@@ -92,26 +92,34 @@ set conceallevel=0
 let g:vim_json_syntax_conceal = 0
 
 " Terminal
-function! TermOpen()
-  if empty(term_list())
-    execute "terminal ++close"
-  else
-    let bufnr = term_list()[0]
-    let winnr = bufwinnr(bufnr)
-    echo winnr
-    if winnr < 0
-      execute "sbuffer " . bufnr
-    else
-      execute winnr . "hide"
-    endif
-  endif
-endfunction
-command! TermOpen call TermOpen()
-command! TermNew execute "terminal++close"
-nnoremap <leader>t :call TermOpen()<CR>
-tnoremap <C-W>t <C-W>:call TermOpen()<CR>
-if !has('nvim')
+if has('nvim')
+  lua require("toggleterm").setup()
+  nnoremap <leader>t :ToggleTerm<CR>
+  tnoremap <C-w><C-[> <C-\><C-n>
+  tnoremap <C-w>h <Cmd>wincmd h<CR>
+  tnoremap <C-w>j <Cmd>wincmd j<CR>
+  tnoremap <C-w>k <Cmd>wincmd k<CR>
+  tnoremap <C-w>l <Cmd>wincmd l<CR>
+else
   set termwinsize=15x0
+  function! TermOpen()
+    if empty(term_list())
+      execute "terminal ++close"
+    else
+      let bufnr = term_list()[0]
+      let winnr = bufwinnr(bufnr)
+      echo winnr
+      if winnr < 0
+        execute "sbuffer " . bufnr
+      else
+        execute winnr . "hide"
+      endif
+    endif
+  endfunction
+  command! TermOpen call TermOpen()
+  command! TermNew execute "terminal++close"
+  nnoremap <leader>t :call TermOpen()<CR>
+  tnoremap <C-W>t <C-W>:call TermOpen()<CR>
 endif
 
 " Emmet

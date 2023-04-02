@@ -25,6 +25,10 @@ Plug 'aklt/plantuml-syntax'
 Plug 'hashivim/vim-terraform'
 Plug 'jparise/vim-graphql'
 Plug 'dag/vim-fish'
-Plug 'github/copilot.vim'
+
+if has('nvim')
+  Plug 'github/copilot.vim'
+  Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+endif
 
 call plug#end()
