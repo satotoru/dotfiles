@@ -1,5 +1,5 @@
 if has('nvim')
-  set rtp^=/home/satotoru/.vim/
+  set rtp^=~/.vim/
   tnoremap <C-W><C-n> <C-\><C-n>
 endif
 
