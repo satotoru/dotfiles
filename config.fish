@@ -25,6 +25,9 @@ if [ (uname -a | grep Darwin | wc -l) -gt 0 ]
   if [ (which python |  wc -l) -gt 0 ]
     set -x PATH '/Users/satotoru/Library/Python/3.7/bin' $PATH
   end
+
+  ## homebrew
+  eval (/opt/homebrew/bin/brew shellenv)
 end
 
 # WSL Settings
