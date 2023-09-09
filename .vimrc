@@ -1,3 +1,9 @@
+if exists('g:vscode')
+  set rtp^=~/.vim/
+  runtime! vscode.vim
+  finish
+endif
+
 if has('nvim')
   set rtp^=~/.vim/
   tnoremap <C-W><C-n> <C-\><C-n>
