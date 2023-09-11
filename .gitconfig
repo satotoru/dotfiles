@@ -1,5 +1,5 @@
 [core]
-	excludesfile = /Users/satotoru/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = vim
 [alias]
 	co = checkout

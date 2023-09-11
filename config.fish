@@ -28,6 +28,12 @@ if [ (uname -a | grep Darwin | wc -l) -gt 0 ]
 
   ## homebrew
   eval (/opt/homebrew/bin/brew shellenv)
+
+  ## rbenv
+  status --is-interactive; and rbenv init - fish | source
+
+  ## nodenv
+  eval "$(nodenv init -)"
 end
 
 # WSL Settings
@@ -55,12 +61,14 @@ alias g 'git'
 alias gb 'git branch'
 alias gco 'git checkout'
 alias gf 'git fetch'
+alias git_branch_name 'git branch | grep \* | cut -d \' \' -f2'
 alias ggpush 'git push origin (git_branch_name)'
 alias gl 'git pull'
 alias gp 'git push'
 alias gst 'git status'
 alias gwip 'git add -A; git rm (git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
 alias gfzco 'git branch | fzf | xargs -I\'{}\' git checkout \'{}\''
+alias gbrowse 'gh browse --branch (gb --show-current)'
 alias clear '/usr/bin/clear'
 # docker
 alias dki 'docker container run --rm -i -t -P'
