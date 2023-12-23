@@ -20,6 +20,9 @@ git = "https://github.com/zsh-users/zsh-autosuggestions"
 [plugins.zsh-z]
 git = "https://github.com/agkozak/zsh-z.git"
 
+[plugins.zsh-syntax-highlighting]
+git = "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+
 # For example:
 #
 # [plugins.base16]
