@@ -51,7 +51,7 @@ set number
 set guifont=Source\ Code\ Pro\ for\ Powerline:h10
 
 " colorscheme
-colorscheme NeoSolarized
+colorscheme pablo
 
 " Ex wild mode
 set wildmode=list:longest,full
@@ -199,11 +199,3 @@ let g:terraform_fmt_on_save=1
 
 " Goyo
 nnoremap <C-W>z :Goyo 100%x100%<CR>
-
-" NerdTree
-autocmd VimEnter * NERDTree | wincmd p
-"" Close the tab if NERDTree is the only window remaining in it.
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <leader>nf :NERDTreeFind<CR>
-nnoremap <leader>nt :NERDTreeToggle<CR>
