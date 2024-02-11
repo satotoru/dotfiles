@@ -40,7 +40,11 @@ if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
   export PATH=/home/satotoru/.ghcup/bin:$PATH
 fi
 
-eval "$(starship init zsh)"
+# pure prompt
+# https://github.com/sindresorhus/pure
+fpath+=($HOME/.zsh/pure)
+autoload -U promptinit; promptinit
+prompt pure
 
 eval "$(sheldon source)"
 
