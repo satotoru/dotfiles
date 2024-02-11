@@ -15,13 +15,18 @@ shell = "zsh"
 [plugins]
 
 [plugins.zsh-autosuggestions]
-git = "https://github.com/zsh-users/zsh-autosuggestions"
+github = "zsh-users/zsh-autosuggestions"
+use = ["{{ name }}.zsh"]
 
 [plugins.zsh-z]
-git = "https://github.com/agkozak/zsh-z.git"
+github = "agkozak/zsh-z"
 
 [plugins.zsh-syntax-highlighting]
-git = "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+github = "zsh-users/zsh-syntax-highlighting"
+
+[plugins.pure]
+github = "sindresorhus/pure"
+use = ["async.zsh", "pure.zsh"]
 
 # For example:
 #
