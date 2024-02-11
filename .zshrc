@@ -40,12 +40,6 @@ if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
   export PATH=/home/satotoru/.ghcup/bin:$PATH
 fi
 
-# pure prompt
-# https://github.com/sindresorhus/pure
-fpath+=($HOME/.zsh/pure)
-autoload -U promptinit; promptinit
-prompt pure
-
 eval "$(sheldon source)"
 
 HISTFILE=~/.zsh_history
@@ -108,4 +102,3 @@ if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
   alias open='explorer.exe'
   alias win_paste='powershell.exe Get-Clipboard'
 fi
-
