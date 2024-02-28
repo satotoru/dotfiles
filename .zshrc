@@ -85,6 +85,7 @@ alias g='git'
 alias gb='git branch'
 alias gco='git checkout'
 alias gf='git fetch'
+alias git_branch_name="git branch | grep \* | cut -d ' ' -f2"
 alias ggpush='git push origin $(git_branch_name)'
 alias gl='git pull'
 alias gp='git push'
