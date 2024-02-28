@@ -28,6 +28,8 @@ github = "zsh-users/zsh-syntax-highlighting"
 github = "sindresorhus/pure"
 use = ["async.zsh", "pure.zsh"]
 
+[plugins.zsh-bd]
+git = "https://github.com/Tarrasch/zsh-bd.git"
 # For example:
 #
 # [plugins.base16]
