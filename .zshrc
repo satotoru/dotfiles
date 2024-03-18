@@ -103,3 +103,9 @@ if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
   alias open='explorer.exe'
   alias win_paste='powershell.exe Get-Clipboard'
 fi
+
+# Mac only
+if [[ $(uname -a | grep -c Darwin) -gt 0 ]]; then
+  # direnv
+  eval "$(direnv hook zsh)"
+fi
