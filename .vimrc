@@ -51,7 +51,7 @@ set number
 set guifont=Source\ Code\ Pro\ for\ Powerline:h10
 
 " colorscheme
-colorscheme default
+colorscheme desert
 
 " Ex wild mode
 set wildmode=list:longest,full
