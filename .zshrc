@@ -102,6 +102,8 @@ alias stop_dev_instance='aws ec2 stop-instances --instance-ids $(aws ec2 describ
 if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
   alias open='explorer.exe'
   alias win_paste='powershell.exe Get-Clipboard'
+
+  if [ -e /home/satotoru/.nix-profile/etc/profile.d/nix.sh ]; then . /home/satotoru/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 fi
 
 # Mac only
