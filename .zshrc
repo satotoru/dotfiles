@@ -11,21 +11,36 @@ if [[ $(uname -a | grep -c Darwin) -gt 0 ]]; then
     export PATH=$GOPATH/bin:$PATH
   fi
 
-  # OpenSSL setting
-  export PATH='/usr/local/opt/openssl/bin':$PATH
-
-  # Python settings
-  if command -v python &> /dev/null; then
-    export PATH='/Users/satotoru/Library/Python/3.7/bin':$PATH
-  fi
-
   # Homebrew
   eval $(/opt/homebrew/bin/brew shellenv)
 
   # rbenv
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
+
+  # nodenv
+  export PATH="$HOME/.nodenv/shims:${PATH}"
+  export NODENV_SHELL=zsh
+  command nodenv rehash 2>/dev/null
+  nodenv() {
+    local command
+    command="${1:-}"
+    if [ "$#" -gt 0 ]; then
+      shift
+    fi
+
+    case "$command" in
+    rehash|shell)
+      eval "$(nodenv "sh-$command" "$@")";;
+    *)
+      command nodenv "$command" "$@";;
+    esac
+  }
+
+  # Rancher Desktop
+  export PATH="$HOME/.rd/bin:$PATH"
 fi
+
 # WSL Settings
 if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
@@ -43,8 +58,6 @@ if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
   export PATH=/home/satotoru/.ghcup/bin:$PATH
 fi
 
-eval "$(sheldon source)"
-
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
@@ -59,6 +72,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+eval "$(sheldon source)"
 
 # Set locale settings
 export LC_CTYPE=ja_JP.UTF-8
@@ -81,7 +95,8 @@ bindkey '^r' fzf-select-history
 
 # Aliases
 ## Common
-alias be='bundle exec'
+alias la='ls -la'
+alias ll='ls -l'
 alias today='date +"%Y-%m-%d"'
 ## Git
 alias g='git'
