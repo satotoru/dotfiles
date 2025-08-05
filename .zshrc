@@ -21,8 +21,11 @@ if [[ $(uname -a | grep -c Darwin) -gt 0 ]]; then
 
   # Homebrew
   eval $(/opt/homebrew/bin/brew shellenv)
-fi
 
+  # rbenv
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
 # WSL Settings
 if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
