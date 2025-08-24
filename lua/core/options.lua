@@ -25,3 +25,9 @@ opt.smartcase = true
 opt.clipboard = "unnamedplus"
 opt.completeopt = { "menu", "menuone", "noselect" }
 opt.hidden = true
+
+-- 自動保存
+vim.api.nvim_create_autocmd("InsertLeave", {
+  pattern = "*",
+  command = "silent! write"
+})
