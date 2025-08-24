@@ -30,3 +30,6 @@ keymap("c", "<C-e>", "<End>", { desc = "行末へ移動" })
 
 -- Shift+Tab逆インデント (旧設定から移行)
 keymap("i", "<S-Tab>", "<C-d>", { desc = "逆インデント" })
+
+keymap("n", "<leader><space>", "/", { desc = "検索開始" })
+keymap("n", "<leader>x", ":e ~/buffer.md<CR>", { desc = "スクラッチバッファを開く" })
