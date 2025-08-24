@@ -1,5 +1,6 @@
 return {
   "nvim-lua/plenary.nvim",
+  lazy = false,
   config = function()
     local function open_ai_instruction()
       local cwd = vim.fn.getcwd()
@@ -32,6 +33,8 @@ return {
       -- Load file content
       vim.cmd("edit " .. ai_file)
       
+      -- Close on <Esc><Esc>
+      vim.api.nvim_buf_set_keymap(buf, "n", "<Esc><Esc>", ":q<CR>", { noremap = true, silent = true })
     end
     
     -- Set up keymap
