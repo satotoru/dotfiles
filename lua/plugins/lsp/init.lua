@@ -1,18 +1,11 @@
 -- LSP関連プラグインの定義 (サンプル)
 return {
-  "neovim/nvim-lspconfig",
-  dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+  "mason-org/mason-lspconfig.nvim",
+  opts = {
+    ensure_installed = { "lua_ls" },
   },
-  config = function()
-    require("mason").setup()
-    require("mason-lspconfig").setup({
-      ensure_installed = { "lua_ls" },
-    })
-    
-    -- LSP基本設定のサンプル
-    local lspconfig = require("lspconfig")
-    lspconfig.lua_ls.setup({})
-  end,
+  dependencies = {
+    { "mason-org/mason.nvim", opts = {} },
+    "neovim/nvim-lspconfig",
+  },
 }
