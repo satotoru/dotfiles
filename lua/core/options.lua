@@ -33,11 +33,6 @@ opt.wildmode = { "list:longest", "full" }  -- コマンドライン補完
 opt.switchbuf = "useopen"                   -- QuickFix効率化
 opt.laststatus = 2                          -- ステータスライン常時表示
 
--- 自動保存
-vim.api.nvim_create_autocmd("InsertLeave", {
-  pattern = "*",
-  command = "silent! write"
-})
 
 -- 行末空白削除 (旧設定から移行)
 vim.api.nvim_create_autocmd("BufWritePre", {

@@ -45,6 +45,15 @@ return {
       -- Close on <Esc><Esc>
       vim.api.nvim_buf_set_keymap(buf, "n", "<Esc><Esc>", ":q<CR>", { noremap = true, silent = true })
 
+      -- AI指示バッファでのみ自動保存を有効にする
+      vim.api.nvim_create_autocmd("InsertLeave", {
+        buffer = buf,
+        callback = function()
+          vim.cmd("silent! write")
+        end,
+        desc = "AI指示ファイルの自動保存"
+      })
+
     end
 
     -- Set up keymap
