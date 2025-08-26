@@ -7,7 +7,7 @@ vim.g.maplocalleader = " "
 local keymap = vim.keymap.set
 
 -- ノーマルモード
-keymap("n", "<leader>pv", vim.cmd.Ex, { desc = "プロジェクトツリーを開く" })
+keymap("n", "<leader>e", vim.cmd.Ex, { desc = "プロジェクトツリーを開く" })
 keymap("n", "<C-h>", "<C-w>h", { desc = "左のウィンドウへ移動" })
 keymap("n", "<C-l>", "<C-w>l", { desc = "右のウィンドウへ移動" })
 
