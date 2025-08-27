@@ -8,6 +8,7 @@ return {
     { "<leader>fa", "<cmd>Telescope find_files hidden=true<cr>", desc = "隠しファイル込み検索" },
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "バッファ一覧" },
     { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Grep検索" },
+    { "<leader>fq", "<cmd>Telescope quickfix<cr>", desc = "quickfix検索" },
   },
   config = function()
     require("telescope").setup()
