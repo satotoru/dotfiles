@@ -5,17 +5,30 @@
 ```
 ~/.config/nvim/
 ├── init.lua                    # エントリーポイント - コア設定とプラグインを読み込み
+├── lazy-lock.json             # プラグインのロックファイル
 ├── lua/
 │   ├── core/                   # Neovimの基本設定
 │   │   ├── options.lua        # vim.opt設定
 │   │   └── keymaps.lua        # キーマッピングとリーダーキー
 │   ├── plugins/                # プラグイン設定 (1ファイル1プラグイン)
+│   │   ├── abolish.lua        # テキスト置換
+│   │   ├── ai-instruction.lua # AI指示ファイル自動保存
 │   │   ├── colorscheme.lua    # カラースキーム設定
+│   │   ├── commentary.lua     # コメント操作
+│   │   ├── emmet.lua          # HTMLタグ展開
+│   │   ├── file-path-yank.lua # ファイルパス操作
+│   │   ├── fugitive.lua       # Git統合
+│   │   ├── git-signs.lua      # Git差分表示
+│   │   ├── goyo.lua           # 集中モード
+│   │   ├── indent-guides.lua  # インデントガイド
+│   │   ├── nvim-cmp.lua       # 自動補完
+│   │   ├── surround.lua       # 囲み文字操作
 │   │   ├── telescope.lua      # ファジーファインダー
+│   │   ├── toggleterm.lua     # ターミナル統合
 │   │   ├── treesitter.lua     # シンタックスハイライト
-│   │   └── lsp/               # 複雑なプラグインはサブディレクトリで管理
-│   │       ├── init.lua       # LSPプラグイン定義
-│   │       └── settings.lua   # LSPサーバー固有の設定
+│   │   ├── unimpaired.lua     # ナビゲーション
+│   │   └── lsp/               # LSP関連設定
+│   │       └── init.lua       # LSPプラグイン定義
 │   └── lazy-setup.lua         # プラグインマネージャーのセットアップ
 ```
 
@@ -80,18 +93,53 @@
 ## 現在の設定
 
 ### インストール済みプラグイン
-- **tokyonight.nvim**: カラースキーム
+- **tokyonight.nvim**: カラースキーム（Tokyo Night Storm）
 - **telescope.nvim**: ファイル/grep検索付きファジーファインダー
 - **nvim-treesitter**: 強化されたシンタックスハイライト
-- **nvim-lspconfig + mason.nvim**: 自動インストール機能付きLSPサポート
+- **mason.nvim + mason-lspconfig.nvim**: LSPサーバー自動管理
+- **nvim-lspconfig**: LSP設定（lua_ls）
+- **nvim-cmp**: 自動補完（LSP、スニペット、バッファ、パス、コマンドライン対応）
+- **LuaSnip**: スニペットエンジン
+- **vim-fugitive**: Git統合
+- **gitsigns.nvim**: Git差分表示
+- **vim-commentary**: コメント操作
+- **vim-surround**: 囲み文字操作
+- **vim-abolish**: テキスト置換
+- **vim-unimpaired**: ナビゲーション
+- **goyo.vim**: 集中モード
+- **indent-blankline.nvim**: インデントガイド
+- **emmet-vim**: HTMLタグ展開
+- **toggleterm.nvim**: ターミナル統合
+- **file-path-yank**: ファイルパス操作
+- **ai-instruction**: AI指示ファイル自動保存
 
 ### キーマッピング
+#### 基本
 - リーダーキー: `<Space>`
-- `<leader>pv`: ファイルエクスプローラーを開く
-- `<leader>ff`: Telescopeファイル検索
-- `<leader>fg`: Telescope grep検索
-- `<leader>fb`: バッファ一覧
+- `<leader>e`: プロジェクトツリー（netrw）を開く
 - `<C-h>/<C-l>`: ウィンドウ間移動
+- `<leader><space>`: 検索開始
+- `<leader>x`: スクラッチバッファを開く
+
+#### Telescope
+- `<leader>ff`: ファイル検索
+- `<leader>fa`: 隠しファイル込み検索
+- `<leader>fg`: Grep検索
+- `<leader>fb`: バッファ一覧
+- `<leader>fq`: Quickfix検索
+
+#### 編集
+- `J`/`K` (visual): 選択範囲を上下に移動
+- `<S-Tab>` (insert): 逆インデント
+
+#### Emacsライク
+- `<C-f>/<C-b>`: カーソル左右移動（insert/command）
+- `<C-a>/<C-e>`: 行頭/行末移動（insert/command）
+
+#### 自動補完
+- `<C-Space>`: 補完開始
+- `<CR>`: 補完確定
+- `<Tab>/<S-Tab>`: 補完アイテム選択、スニペット展開/ジャンプ
 
 ### コア設定
 - 相対行番号付きの行番号表示
