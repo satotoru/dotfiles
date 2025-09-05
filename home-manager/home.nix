@@ -32,6 +32,8 @@
     fzf
   ];
 
+  programs.zsh.enable = true;
+
   # --- zsh設定ファイルのシンボリックリンク管理 ---
   # 既存のdotfilesリポジトリから設定ファイルのシンボリックリンクを作成します。
   # `source` のパスをあなたのdotfilesの実際のパスに置き換えてください。
