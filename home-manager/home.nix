@@ -1,9 +1,12 @@
-# ~/.config/nixpkgs/home.nix に配置する設定ファイル
-# このファイルにユーザー環境に必要なパッケージや設定をすべて記述します。
-
 { config, pkgs, ... }:
 
 {
+  # `./extra.nix` というファイルが存在する場合にのみ、その設定を読み込む。
+  # これにより、環境ごとの設定を安全に分離できる。
+  imports = [
+    /home/satotoru/.config/home-manager/extra.nix
+  ];
+
   home.username = "satotoru";
   home.homeDirectory = "/home/satotoru";
   # Home Managerに管理させたいパッケージをここにリストアップします。
@@ -31,8 +34,6 @@
     ripgrep
     fzf
   ];
-
-  programs.zsh.enable = true;
 
   # --- zsh設定ファイルのシンボリックリンク管理 ---
   # 既存のdotfilesリポジトリから設定ファイルのシンボリックリンクを作成します。

@@ -56,6 +56,10 @@ if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
   fi
   export PATH=$HOME/.cabal/bin:$PATH
   export PATH=/home/satotoru/.ghcup/bin:$PATH
+
+  # ssh-agentを起動
+  keychain -q --nogui $HOME/.ssh/id_rsa
+  source $HOME/.keychain/$(hostname)-sh
 fi
 
 HISTFILE=~/.zsh_history
