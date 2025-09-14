@@ -57,9 +57,13 @@ if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
   export PATH=$HOME/.cabal/bin:$PATH
   export PATH=/home/satotoru/.ghcup/bin:$PATH
 
-  # ssh-agentを起動
-  keychain -q --nogui $HOME/.ssh/id_rsa
-  source $HOME/.keychain/$(hostname)-sh
+  # ssh-agent
+  export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+  ss -a | grep -q $SSH_AUTH_SOCK
+  if [ $? -ne 0 ]; then
+    rm -f $SSH_AUTH_SOCK
+    (setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"/mnt/c/tools/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork &) >/dev/null 2>&1
+  fi
 fi
 
 HISTFILE=~/.zsh_history
