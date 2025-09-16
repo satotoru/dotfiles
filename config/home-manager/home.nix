@@ -1,14 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, username ? "satotoru", homeDirectory ? "/home/satotoru", extraImports ? [], ... }:
 
 {
-  # `./extra.nix` というファイルが存在する場合にのみ、その設定を読み込む。
-  # これにより、環境ごとの設定を安全に分離できる。
-  imports = [
-    /home/satotoru/.config/home-manager/extra.nix
-  ];
+  # 外部から渡されたimportsを使用（デフォルトは空）
+  imports = extraImports;
 
-  home.username = "satotoru";
-  home.homeDirectory = "/home/satotoru";
+  home.username = username;
+  home.homeDirectory = homeDirectory;
   # Home Managerに管理させたいパッケージをここにリストアップします。
   # このリストを編集して `home-manager switch` を実行するだけで、
   # ユーザー環境のパッケージが更新されます。
@@ -40,40 +37,42 @@
 
   # --- zsh設定ファイルのシンボリックリンク管理 ---
   # 既存のdotfilesリポジトリから設定ファイルのシンボリックリンクを作成します。
-  # `source` のパスをあなたのdotfilesの実際のパスに置き換えてください。
-  home.file = {
+  home.file = let
+    # dotfilesリポジトリのパス（~/.config/home-managerからdotfilesへの参照）
+    dotfilesPath = "${homeDirectory}/ghq/github.com/satotoru/dotfiles";
+  in {
     # 例1: ~/.zshrc へのシンボリックリンクを作成
     ".zshrc" = {
-      source = ~/ghq/github.com/satotoru/dotfiles/zsh/.zshrc;
+      source = "${dotfilesPath}/zsh/.zshrc";
     };
 
     ".gitignore_global" = {
-      source = ~/ghq/github.com/satotoru/dotfiles/git/.gitignore_global;
+      source = "${dotfilesPath}/git/.gitignore_global";
     };
 
     ".gitconfig" = {
-      source = ~/ghq/github.com/satotoru/dotfiles/git/.gitconfig;
+      source = "${dotfilesPath}/git/.gitconfig";
     };
 
     ".tmux.conf" = {
-      source = ~/ghq/github.com/satotoru/dotfiles/tmux/.tmux.conf;
+      source = "${dotfilesPath}/tmux/.tmux.conf";
     };
 
     ".config/sheldon/plugins.toml" = {
-      source = ~/ghq/github.com/satotoru/dotfiles/sheldon/plugins.toml;
+      source = "${dotfilesPath}/sheldon/plugins.toml";
     };
 
     ".config/starship.toml" = {
-      source = ~/ghq/github.com/satotoru/dotfiles/starship/starship.toml;
+      source = "${dotfilesPath}/starship/starship.toml";
     };
 
     ".config/nvim" = {
-      source = ~/ghq/github.com/satotoru/dotfiles/nvim;
+      source = "${dotfilesPath}/nvim";
     };
 
     # claude
     ".claude/commands/AI.md" = {
-      source = ~/ghq/github.com/satotoru/dotfiles/claude/commands/AI.md;
+      source = "${dotfilesPath}/claude/commands/AI.md";
     };
   };
 
