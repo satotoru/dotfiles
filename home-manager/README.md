@@ -6,7 +6,7 @@
 
 1. このディレクトリの内容を`~/.config/home-manager/`にコピー：
 ```bash
-cp -r config/home-manager/* ~/.config/home-manager/
+cp -r home-manager/* ~/.config/home-manager/
 ```
 
 2. `~/.config/home-manager/`に移動：

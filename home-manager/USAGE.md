@@ -8,7 +8,7 @@
 
 1. Home Manager設定を`~/.config/home-manager/`にコピー：
 ```bash
-cp -r config/home-manager/* ~/.config/home-manager/
+cp -r home-manager/* ~/.config/home-manager/
 cd ~/.config/home-manager
 ```
 
@@ -41,7 +41,7 @@ home-manager switch --impure -f users/env-based.nix
 新しいユーザー用設定ファイル作成例：
 
 ```nix
-# home-manager/users/myuser.nix
+# users/myuser.nix
 { config, pkgs, ... }:
 
 import ../home.nix {
@@ -62,16 +62,15 @@ import ../home.nix {
 ## ファイル構造
 
 ```
-├── config/
-│   └── home-manager/            # Home Manager設定（~/.config/home-manager/にコピー）
-│       ├── flake.nix            # Flake設定
-│       ├── home.nix             # メイン設定（パラメータ化済み）
-│       ├── users/               # ユーザー固有設定
-│       │   ├── env-based.nix    # 環境変数ベース設定
-│       │   ├── satotoru.nix     # satotoru用設定
-│       │   └── example-user.nix # 他ユーザー用テンプレート
-│       └── README.md            # 詳細な使用方法
-├── USAGE.md                     # このファイル
+├── home-manager/                # Home Manager設定（~/.config/home-manager/にコピー）
+│   ├── flake.nix                # Flake設定
+│   ├── home.nix                 # メイン設定（パラメータ化済み）
+│   ├── users/                   # ユーザー固有設定
+│   │   ├── env-based.nix        # 環境変数ベース設定
+│   │   ├── satotoru.nix         # satotoru用設定
+│   │   └── example-user.nix     # 他ユーザー用テンプレート
+│   ├── README.md                # 詳細な使用方法
+│   └── USAGE.md                 # このファイル
 └── 各種dotfiles/                # 既存のdotfiles
 ```
 
