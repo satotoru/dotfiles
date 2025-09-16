@@ -4,3 +4,10 @@ nvim/.netrwhist
 karabiner/automatic_backups
 *.exe
 *.swp
+
+# Claude Code - 個人設定とキャッシュファイル
+.claude/settings.local.json
+.claude/cache/
+.claude/logs/
+.claude/temp/
+CLAUDE.local.md
