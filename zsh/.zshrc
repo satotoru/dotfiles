@@ -57,6 +57,9 @@ if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
   export PATH=$HOME/.cabal/bin:$PATH
   export PATH=/home/satotoru/.ghcup/bin:$PATH
 
+  # ~/.local/bin
+  export PATH="$HOME/.local/bin:$PATH"
+
   # ssh-agent
   export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
   ss -a | grep -q $SSH_AUTH_SOCK
