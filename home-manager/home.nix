@@ -30,6 +30,9 @@
     ruby
     nodejs
 
+    # --- 言語サーバー ---
+    lua-language-server
+
     # --- ユーティリティ ---
     ripgrep
     fzf
@@ -66,6 +69,11 @@
 
     ".config/nvim" = {
       source = ~/ghq/github.com/satotoru/dotfiles/nvim;
+    };
+
+    # claude
+    ".claude/commands/AI.md" = {
+      source = ~/ghq/github.com/satotoru/dotfiles/claude/commands/AI.md;
     };
   };
 
