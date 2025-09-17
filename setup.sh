@@ -54,7 +54,7 @@ if command -v home-manager &> /dev/null; then
   echo "Home Managerは既にインストールされています。スキップします。"
 else
   echo "Home Managerをインストールします..."
-  nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz home-manager
+  nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
   nix-channel --update
 
   # `install`は非推奨になりつつあるため、`nix-shell`経由で初期セットアップ

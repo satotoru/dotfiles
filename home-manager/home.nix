@@ -79,7 +79,7 @@
   # home-managerのバージョンを指定します。
   # この設定により、どのマシンでも同じバージョンのhome-managerを使うことが保証され、
   # 予期せぬ挙動を防ぎます。
-  home.stateVersion = "24.05"; # あなたがHome Managerを使い始めるバージョンに合わせてください
+  home.stateVersion = "25.05";
 
   # Home Managerにプログラムの管理を許可します。
   programs.home-manager.enable = true;
