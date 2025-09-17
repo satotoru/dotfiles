@@ -1,2 +1,2 @@
 #include %A_ScriptDir%
-#Include alt-ime-ahk.ahk
+#Include esc-ime-off.ahk
