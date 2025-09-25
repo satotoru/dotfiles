@@ -5,7 +5,7 @@ local opt = vim.opt
 -- 外観
 opt.termguicolors = true
 opt.number = true
-opt.relativenumber = true
+opt.relativenumber = false
 opt.signcolumn = "yes"
 opt.scrolloff = 8
 
