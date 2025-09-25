@@ -39,6 +39,10 @@ if [[ $(uname -a | grep -c Darwin) -gt 0 ]]; then
 
   # Rancher Desktop
   export PATH="$HOME/.rd/bin:$PATH"
+
+  # claude code
+  export PATH="$HOME/.local/bin:$PATH"
+
 fi
 
 # WSL Settings
@@ -135,8 +139,16 @@ if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
   if [ -e /home/satotoru/.nix-profile/etc/profile.d/nix.sh ]; then . /home/satotoru/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 fi
 
+# Mac only alias
+if [[ $(uname -a | grep -c Darwin) -gt 0 ]]; then
+  alias '#'='ghcs'
+fi
+
 # Mac only
 if [[ $(uname -a | grep -c Darwin) -gt 0 ]]; then
   # direnv
   eval "$(direnv hook zsh)"
+
+  # Github Copilot
+  eval "$(gh copilot alias -- zsh)"
 fi
