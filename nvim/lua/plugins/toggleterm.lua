@@ -9,7 +9,7 @@ return {
   config = function()
     require("toggleterm").setup({
       size = 20,
-      open_mapping = [[<c-\>t]],
+      open_mapping = [[<Esc><Esc>]],
       hide_numbers = true,
       shade_terminals = true,
       shading_factor = 2,
@@ -28,5 +28,15 @@ return {
         },
       },
     })
+
+    -- ターミナルモード用のキーマッピング
+    function _G.set_terminal_keymaps()
+      local opts = {buffer = 0}
+      -- Ctrl+W N でノーマルモードに移行
+      vim.keymap.set('t', '<C-w>n', '<C-\\><C-n>', opts)
+    end
+
+    -- ターミナルバッファが開かれたときにキーマッピングを設定
+    vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
   end,
 }
