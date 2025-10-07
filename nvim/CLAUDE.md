@@ -27,6 +27,7 @@
 │   │   ├── toggleterm.lua     # ターミナル統合
 │   │   ├── treesitter.lua     # シンタックスハイライト
 │   │   ├── unimpaired.lua     # ナビゲーション
+│   │   ├── which-key.lua      # キーバインドヘルプ表示
 │   │   └── lsp/               # LSP関連設定
 │   │       └── init.lua       # LSPプラグイン定義
 │   └── lazy-setup.lua         # プラグインマネージャーのセットアップ
@@ -61,6 +62,11 @@
 2. lazy.nvimプラグイン仕様を返す
 3. 設定、キーマップ、依存関係を含める
 4. Neovimを再起動してインストール
+
+### leaderキーバインドの追加
+1. 各プラグインファイルで`keys`テーブルに`desc`パラメータ付きでキーマップを定義
+2. `lua/plugins/which-key.lua` の`wk.add()`にキーバインド説明を追加
+3. グループ化が必要な場合は`group`パラメータを使用（例: `{ "<leader>f", group = "find" }`）
 
 ### 設定の変更
 1. Vimオプションは適切なコアファイルを編集
@@ -112,10 +118,12 @@
 - **toggleterm.nvim**: ターミナル統合
 - **file-path-yank**: ファイルパス操作
 - **ai-instruction**: AI指示ファイル自動保存
+- **which-key.nvim**: キーバインドヘルプ表示
 
 ### キーマッピング
 #### 基本
 - リーダーキー: `<Space>`
+- `<leader>?`: which-keyヘルプを表示（全キーバインド一覧）
 - `<leader>e`: プロジェクトツリー（netrw）を開く
 - `<C-h>/<C-l>`: ウィンドウ間移動
 - `<leader><space>`: 検索開始
@@ -127,6 +135,17 @@
 - `<leader>fg`: Grep検索
 - `<leader>fb`: バッファ一覧
 - `<leader>fq`: Quickfix検索
+- `<leader>*`: カーソル位置/選択範囲でGrep検索
+
+#### ファイルパス操作
+- `<leader>yf`: ファイルパスのみをヤンク
+- `<leader>yp`: ファイルパス+行番号をヤンク
+
+#### ターミナル
+- `<leader>t`: ターミナルを切り替え
+
+#### その他
+- `<C-W>z`: 集中モード切り替え
 
 #### 編集
 - `J`/`K` (visual): 選択範囲を上下に移動
