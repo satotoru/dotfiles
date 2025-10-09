@@ -6,15 +6,23 @@ return {
     { "<leader>?", "<cmd>WhichKey<cr>", desc = "which-keyヘルプを表示" },
   },
   opts = {
-    preset = "modern",
-    delay = 500,
     icons = {
-      breadcrumb = "»",
-      separator = "➜",
-      group = "+",
-    },
-    win = {
-      border = "rounded",
+      rules = false, -- アイコンルールを無効化
+      mappings = false, -- マッピングアイコンを無効化
+      keys = {
+        C = "Ctrl-",
+        M = "Alt-",
+        D = "Cmd-",
+        S = "Shift-",
+        CR = "Enter",
+        Esc = "Esc",
+        ScrollWheelDown = "ScrollDown",
+        ScrollWheelUp = "ScrollUp",
+        NL = "Newline",
+        BS = "Backspace",
+        Space = "Space",
+        Tab = "Tab",
+      },
     },
   },
   config = function(_, opts)
