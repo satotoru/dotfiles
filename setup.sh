@@ -1,85 +1,125 @@
 #!/bin/bash
-#
-# Home Manager環境を自動でセットアップするスクリプト
-# 前提条件: gitがインストールされ、認証済みであること
-#
 
-# エラーが発生した場合はスクリプトを即座に終了する
 set -e
 
-# --- 変数定義 ---
-# あなたのdotfilesリポジトリとクローン先ディレクトリ
-# 必要に応じて変更してください
-DOTFILES_REPO="git@github.com:satotoru/dotfiles.git"
-DOTFILES_DIR="$HOME/ghq/github.com/satotoru/dotfiles"
+# 設定
+USERNAME="$USER"
+HOME_DIR="${1:-$HOME}"
+DOTFILES_PATH="${HOME_DIR}/ghq/github.com/${USERNAME}/dotfiles"
 
-# Home Managerの設定ファイルのパス
-HOME_NIX_SOURCE="$DOTFILES_DIR/home.nix"
-HOME_NIX_TARGET_DIR="$HOME/.config/nixpkgs"
-HOME_NIX_TARGET_FILE="$HOME_NIX_TARGET_DIR/home.nix"
+echo "========================================="
+echo "dotfiles セットアップスクリプト"
+echo "========================================="
+echo "ユーザー: $USERNAME"
+echo "ホームディレクトリ: $HOME_DIR"
+echo "dotfilesパス: $DOTFILES_PATH"
+echo ""
 
-
-echo "=== 1. dotfilesリポジトリのクローンを開始します ==="
-if [ -d "$DOTFILES_DIR" ]; then
-  echo "リポジトリは既に存在します。スキップします: $DOTFILES_DIR"
-else
-  echo "クローン先: $DOTFILES_DIR"
-  # ghqのディレクトリ構造に合わせて親ディレクトリを作成
-  mkdir -p "$(dirname "$DOTFILES_DIR")"
-  git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
-  echo "クローンが完了しました。"
+# Homebrewがインストールされているか確認
+if ! command -v brew &> /dev/null; then
+    echo "エラー: Homebrewがインストールされていません"
+    echo "まずHomebrewをインストールしてください"
+    exit 1
 fi
+
+echo "✓ Homebrewが見つかりました"
 echo ""
+echo "========================================="
+echo "ステップ 1: パッケージをインストール中"
+echo "========================================="
 
+# パッケージリスト
+packages=(
+    # シェルとプロンプト
+    "zsh"
+    "sheldon"
+    "starship"
+    # エディタとターミナルマルチプレクサ
+    "neovim"
+    "tmux"
+    # バージョン管理
+    "git"
+    "ghq"
+    # プログラミング言語とランタイム
+    "ruby"
+    "node"
+    # LSP
+    "lua-language-server"
+    # ユーティリティ
+    "ripgrep"
+    "fzf"
+)
 
-echo "=== 2. Nixパッケージマネージャーのインストールを確認・実行します ==="
-if command -v nix-shell &> /dev/null; then
-  echo "Nixは既にインストールされています。スキップします。"
-else
-  echo "Nixをインストールします..."
-  echo "途中でsudoパスワードの入力を求められる場合があります。"
-  # マルチユーザーインストール用の公式スクリプトを実行
-  curl -L https://nixos.org/nix/install | sh
+for package in "${packages[@]}"; do
+    if brew list "$package" &> /dev/null; then
+        echo "✓ $package はすでにインストール済み"
+    else
+        echo "インストール中: $package"
+        brew install "$package"
+    fi
+done
 
-  # 現在のシェルセッションでNixを有効化
-  # これをしないと以降のnix-channelコマンド等が失敗する
-  source "$HOME/.nix-profile/etc/profile.d/nix.sh"
-  echo "Nixのインストールが完了しました。"
+echo ""
+echo "========================================="
+echo "ステップ 2: シンボリックリンクを設定中"
+echo "========================================="
+
+# dotfilesディレクトリが存在するか確認
+if [ ! -d "$DOTFILES_PATH" ]; then
+    echo "エラー: dotfiles ディレクトリが見つかりません"
+    echo "パス: $DOTFILES_PATH"
+    echo "まず ghq で dotfiles リポジトリをクローンしてください"
+    exit 1
 fi
+
+# シンボリックリンク設定
+create_symlink() {
+    local src="$1"
+    local dst="$2"
+    local dst_dir=$(dirname "$dst")
+
+    if [ ! -e "$src" ]; then
+        echo "⚠ ソースが見つかりません: $src (スキップ)"
+        return
+    fi
+
+    # ディレクトリがなければ作成
+    mkdir -p "$dst_dir"
+
+    # 既存のファイル/リンクがあれば削除
+    if [ -e "$dst" ] || [ -L "$dst" ]; then
+        echo "削除中: $dst"
+        rm -rf "$dst"
+    fi
+
+    # シンボリックリンク作成
+    ln -s "$src" "$dst"
+    echo "✓ リンク作成: $dst -> $src"
+}
+
+# リンク定義
+declare -A symlinks=(
+    ["$DOTFILES_PATH/zsh/.zshrc"]="$HOME_DIR/.zshrc"
+    ["$DOTFILES_PATH/git/.gitignore_global"]="$HOME_DIR/.gitignore_global"
+    ["$DOTFILES_PATH/git/.gitconfig"]="$HOME_DIR/.gitconfig"
+    ["$DOTFILES_PATH/tmux/.tmux.conf"]="$HOME_DIR/.tmux.conf"
+    ["$DOTFILES_PATH/sheldon/plugins.toml"]="$HOME_DIR/.config/sheldon/plugins.toml"
+    ["$DOTFILES_PATH/starship/starship.toml"]="$HOME_DIR/.config/starship.toml"
+    ["$DOTFILES_PATH/nvim"]="$HOME_DIR/.config/nvim"
+    ["$DOTFILES_PATH/claude/commands/AI.md"]="$HOME_DIR/.claude/commands/AI.md"
+)
+
+for src in "${!symlinks[@]}"; do
+    dst="${symlinks[$src]}"
+    create_symlink "$src" "$dst"
+done
+
 echo ""
-
-
-echo "=== 3. Home Managerのインストールを確認・実行します ==="
-if command -v home-manager &> /dev/null; then
-  echo "Home Managerは既にインストールされています。スキップします。"
-else
-  echo "Home Managerをインストールします..."
-  nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-  nix-channel --update
-
-  # `install`は非推奨になりつつあるため、`nix-shell`経由で初期セットアップ
-  # home-manager switch を初回実行するために必要
-  export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-  nix-shell '<home-manager>' -A install
-  echo "Home Managerのインストールが完了しました。"
-fi
+echo "========================================="
+echo "セットアップ完了！"
+echo "========================================="
 echo ""
-
-
-echo "=== 4. home.nixのシンボリックリンクを作成します ==="
-echo "ソース: $HOME_NIX_SOURCE"
-echo "ターゲット: $HOME_NIX_TARGET_FILE"
-mkdir -p "$HOME_NIX_TARGET_DIR"
-# -f オプションで既存のリンクがあれば上書きする
-ln -sf "$HOME_NIX_SOURCE" "$HOME_NIX_TARGET_FILE"
-echo "シンボリックリンクを作成しました。"
+echo "次のステップ:"
+echo "1. シェルを再起動するか以下を実行: exec \$SHELL"
+echo "2. 設定ファイルを確認して必要に応じて編集してください"
 echo ""
-
-
-echo "=== 5. Home Managerで環境を構築します ==="
-echo "'home-manager switch' を実行します。これには時間がかかる場合があります..."
-home-manager switch
-echo ""
-
-echo "🎉 セットアップが完了しました！"
-echo "新しいターミナルを開いて、環境が適用されているか確認してください。"
