@@ -23,7 +23,7 @@
 │   │   ├── indent-guides.lua  # インデントガイド
 │   │   ├── nvim-cmp.lua       # 自動補完
 │   │   ├── surround.lua       # 囲み文字操作
-│   │   ├── telescope.lua      # ファジーファインダー
+│   │   ├── fzf-lua.lua        # ファジーファインダー
 │   │   ├── toggleterm.lua     # ターミナル統合
 │   │   ├── treesitter.lua     # シンタックスハイライト
 │   │   ├── unimpaired.lua     # ナビゲーション
@@ -100,7 +100,7 @@
 
 ### インストール済みプラグイン
 - **tokyonight.nvim**: カラースキーム（Tokyo Night Storm）
-- **telescope.nvim**: ファイル/grep検索付きファジーファインダー
+- **fzf-lua**: ファイル/grep検索付きファジーファインダー
 - **nvim-treesitter**: 強化されたシンタックスハイライト
 - **mason.nvim + mason-lspconfig.nvim**: LSPサーバー自動管理
 - **nvim-lspconfig**: LSP設定（lua_ls）
@@ -129,7 +129,7 @@
 - `<leader><space>`: 検索開始
 - `<leader>x`: スクラッチバッファを開く
 
-#### Telescope
+#### fzf-lua
 - `<leader>ff`: ファイル検索
 - `<leader>fa`: 隠しファイル込み検索
 - `<leader>fg`: Grep検索

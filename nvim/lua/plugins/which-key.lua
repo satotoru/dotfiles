@@ -36,7 +36,7 @@ return {
       { "<leader><space>", desc = "検索開始" },
       { "<leader>x", desc = "スクラッチバッファを開く" },
 
-      -- Telescopeグループ
+      -- fzf-luaグループ
       { "<leader>f", group = "find" },
       { "<leader>ff", desc = "ファイル検索" },
       { "<leader>fa", desc = "隠しファイル込み検索" },
