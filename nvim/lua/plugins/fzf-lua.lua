@@ -3,7 +3,7 @@ return {
   "ibhagwan/fzf-lua",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   keys = {
-    { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "ファイル検索" },
+    { "<leader>ff", function() require("fzf-lua").files({ hidden = false }) end, desc = "ファイル検索" },
     { "<leader>fa", function() require("fzf-lua").files({ hidden = true }) end, desc = "隠しファイル込み検索" },
     { "<leader>fb", "<cmd>FzfLua buffers<cr>", desc = "バッファ一覧" },
     { "<leader>fg", "<cmd>FzfLua live_grep<cr>", desc = "Grep検索" },
