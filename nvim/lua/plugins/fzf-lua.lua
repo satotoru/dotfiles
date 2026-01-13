@@ -1,7 +1,6 @@
 -- fzf-lua設定 (telescope.nvimからの移行)
 return {
   "ibhagwan/fzf-lua",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
   keys = {
     { "<leader>ff", function() require("fzf-lua").files({ hidden = false }) end, desc = "ファイル検索" },
     { "<leader>fa", function() require("fzf-lua").files({ hidden = true }) end, desc = "隠しファイル込み検索" },
@@ -15,6 +14,11 @@ return {
     require("fzf-lua").setup({
       -- デフォルトのプロファイルを使用（telescope風UI）
       "telescope",
+      defaults = {
+        file_icons = false,
+        git_icons = false,
+        color_icons = false,
+      },
       winopts = {
         height = 0.85,
         width = 0.80,
