@@ -9,7 +9,6 @@ return {
   config = function()
     require("toggleterm").setup({
       size = 20,
-      open_mapping = [[<Esc><Esc>]],
       hide_numbers = true,
       shade_terminals = true,
       shading_factor = 2,
@@ -34,6 +33,8 @@ return {
       local opts = {buffer = 0}
       -- Ctrl+W N でノーマルモードに移行
       vim.keymap.set('t', '<C-w>n', '<C-\\><C-n>', opts)
+      -- <Esc><Esc> でターミナルを閉じる
+      vim.keymap.set('t', '<Esc><Esc>', '<cmd>ToggleTerm<cr>', opts)
     end
 
     -- ターミナルバッファが開かれたときにキーマッピングを設定
