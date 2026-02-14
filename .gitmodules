@@ -1,3 +1,0 @@
-[submodule "linux/.config/awesome/vicious"]
-	path = linux/.config/awesome/vicious
-	url = git@github.com:vicious-widgets/vicious.git
