@@ -1,5 +1,24 @@
-# Mac Settings
-if [[ $(uname -a | grep -c Darwin) -gt 0 ]]; then
+# ============================================================
+# Platform Detection
+# ============================================================
+_is_macos=false
+_is_linux=false
+_is_wsl=false
+
+case "$(uname -s)" in
+  Darwin) _is_macos=true ;;
+  Linux)
+    _is_linux=true
+    if [[ -n "$WSL_DISTRO_NAME" ]]; then
+      _is_wsl=true
+    fi
+    ;;
+esac
+
+# ============================================================
+# macOS Settings
+# ============================================================
+if $_is_macos; then
   # VIM_APP_DIR
   export VIM_APP_DIR=$HOME/Applications
 
@@ -39,40 +58,34 @@ if [[ $(uname -a | grep -c Darwin) -gt 0 ]]; then
 
   # Rancher Desktop
   export PATH="$HOME/.rd/bin:$PATH"
-
-  # claude code
-  export PATH="$HOME/.local/bin:$PATH"
-
 fi
 
-# WSL Settings
-if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
-  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-  # Cargo (Rust) settings
-  if command -v cargo &> /dev/null; then
-    export PATH='/home/satotoru/.cargo/bin':$PATH
+# ============================================================
+# Linux Settings (native Linux and WSL)
+# ============================================================
+if $_is_linux; then
+  # Linuxbrew
+  if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
   fi
+fi
 
-  # Haskell settings
-  if [[ -z $GHCUP_INSTALL_BASE_PREFIX[1] ]]; then
-    export GHCUP_INSTALL_BASE_PREFIX=$HOME
-  fi
-  export PATH=$HOME/.cabal/bin:$PATH
-  export PATH=/home/satotoru/.ghcup/bin:$PATH
-
-  # ~/.local/bin
-  export PATH="$HOME/.local/bin:$PATH"
-
-  # ssh-agent
-  export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
-  ss -a | grep -q $SSH_AUTH_SOCK
+# ============================================================
+# WSL-specific Settings
+# ============================================================
+if $_is_wsl; then
+  # SSH agent relay via npiperelay (Windows OpenSSH agent)
+  export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
+  ss -a | grep -q "$SSH_AUTH_SOCK"
   if [ $? -ne 0 ]; then
-    rm -f $SSH_AUTH_SOCK
-    (setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"/mnt/c/tools/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork &) >/dev/null 2>&1
+    rm -f "$SSH_AUTH_SOCK"
+    (setsid socat UNIX-LISTEN:"$SSH_AUTH_SOCK",fork EXEC:"/mnt/c/tools/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork &) >/dev/null 2>&1
   fi
 fi
 
+# ============================================================
+# Global Settings
+# ============================================================
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
@@ -80,26 +93,28 @@ setopt autocd
 unsetopt beep
 bindkey -e
 
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/satotoru/.zshrc'
-
+# Completion
+zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
 
+# Sheldon (plugin manager)
 eval "$(sheldon source)"
 
-# Set locale settings
+# Locale
 export LC_CTYPE=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 
-# Editor setting
+# Editor
 export EDITOR='vim'
 
-# FZF setting
+# ~/.local/bin
+export PATH="$HOME/.local/bin:$PATH"
+
+# FZF
 export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
 
-## fzf
+## fzf history search
 function fzf-select-history() {
     BUFFER=$(history -n -r 1 | fzf --query "$LBUFFER")
     CURSOR=$#BUFFER
@@ -108,11 +123,13 @@ function fzf-select-history() {
 zle -N fzf-select-history
 bindkey '^r' fzf-select-history
 
-# Aliases
-## Common
+# ============================================================
+# Aliases - Common
+# ============================================================
 alias la='ls -la'
 alias ll='ls -l'
 alias today='date +"%Y-%m-%d"'
+
 ## Git
 alias g='git'
 alias gb='git branch'
@@ -128,27 +145,20 @@ alias gwip='git add -A; git rm --cached $(git ls-files --deleted) 2> /dev/null; 
 # GHQ
 alias repos='ghq list -p | fzf'
 alias repo='cd $(repos)'
-alias start_dev_instance='aws ec2 start-instances --instance-ids $(aws ec2 describe-instances --filters "Name=tag-key,Values=Name" "Name=tag-value,Values=dev_home" --query "Reservations[*].Instances[*].[InstanceId]" --output text)'
-alias stop_dev_instance='aws ec2 stop-instances --instance-ids $(aws ec2 describe-instances --filters "Name=tag-key,Values=Name" "Name=tag-value,Values=dev_home" --query "Reservations[*].Instances[*].[InstanceId]" --output text)'
 
-# WSL only alias
-if [[ $(uname -a | grep -c microsoft) -gt 0 ]]; then
+# ============================================================
+# Aliases - WSL-specific
+# ============================================================
+if $_is_wsl; then
   alias open='explorer.exe'
   alias win_paste='powershell.exe Get-Clipboard'
-
-  if [ -e /home/satotoru/.nix-profile/etc/profile.d/nix.sh ]; then . /home/satotoru/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 fi
 
-# Mac only alias
-if [[ $(uname -a | grep -c Darwin) -gt 0 ]]; then
-  alias '#'='ghcs'
-fi
 
-# Mac only
-if [[ $(uname -a | grep -c Darwin) -gt 0 ]]; then
-  # direnv
+# ============================================================
+# Cross-platform tool integrations
+# ============================================================
+# direnv
+if command -v direnv &> /dev/null; then
   eval "$(direnv hook zsh)"
-
-  # Github Copilot
-  eval "$(gh copilot alias -- zsh)"
 fi
