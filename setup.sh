@@ -78,7 +78,7 @@ fi
 stow_packages=(zsh git tmux sheldon starship nvim claude)
 
 # stow でシンボリックリンクを作成
-stow -R -v -d "$DOTFILES_PATH" -t "$HOME_DIR" "${stow_packages[@]}"
+stow --dotfiles -R -v -d "$DOTFILES_PATH" -t "$HOME_DIR" "${stow_packages[@]}"
 
 echo ""
 echo "========================================="

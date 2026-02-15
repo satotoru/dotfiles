@@ -15,7 +15,7 @@ COPY --chown=testuser:testuser . ghq/github.com/testuser/dotfiles/
 ENV DOTFILES_PATH=/home/testuser/ghq/github.com/testuser/dotfiles
 
 # stow を実行してシンボリックリンクを作成
-RUN stow -R -v -d "$DOTFILES_PATH" -t /home/testuser zsh git tmux sheldon starship nvim claude
+RUN stow --dotfiles -R -v -d "$DOTFILES_PATH" -t /home/testuser zsh git tmux sheldon starship nvim claude
 
 # シンボリックリンクを検証
 # stow はツリーフォールディングを行うため、ディレクトリ単位でシンボリックリンクを作成する
