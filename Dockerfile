@@ -1,6 +1,13 @@
 FROM ubuntu:24.04
 
-RUN apt-get update && apt-get install -y stow zsh && rm -rf /var/lib/apt/lists/*
+# stow 2.4.1をソースからインストール（Ubuntu 24.04の2.3.1は--dotfilesにバグあり）
+RUN apt-get update && apt-get install -y zsh perl make curl texinfo && \
+    cd /tmp && \
+    curl -fsSL https://ftp.gnu.org/gnu/stow/stow-2.4.1.tar.gz -o stow.tar.gz && \
+    tar xzf stow.tar.gz && \
+    cd stow-2.4.1 && ./configure && make && make install && \
+    rm -rf /tmp/stow* && \
+    rm -rf /var/lib/apt/lists/*
 
 # テスト用ユーザーを作成
 RUN useradd -m testuser
@@ -15,7 +22,7 @@ COPY --chown=testuser:testuser . ghq/github.com/testuser/dotfiles/
 ENV DOTFILES_PATH=/home/testuser/ghq/github.com/testuser/dotfiles
 
 # stow を実行してシンボリックリンクを作成
-RUN stow --dotfiles -R -v -d "$DOTFILES_PATH" -t /home/testuser zsh git tmux sheldon starship nvim claude
+RUN stow --dotfiles -R -v -d "$DOTFILES_PATH" -t /home/testuser zsh git tmux sheldon starship nvim claude gemini
 
 # シンボリックリンクを検証
 # stow はツリーフォールディングを行うため、ディレクトリ単位でシンボリックリンクを作成する
@@ -50,6 +57,11 @@ RUN set -e && echo "=== シンボリックリンク検証 ===" && \
     echo "OK: .claude -> $(readlink /home/testuser/.claude)" && \
     test -f /home/testuser/.claude/commands/AI.md && \
     echo "OK: .claude/commands/AI.md はアクセス可能" && \
+    # .gemini 配下（stow がディレクトリ単位でリンクを作成）
+    test -L /home/testuser/.gemini && \
+    echo "OK: .gemini -> $(readlink /home/testuser/.gemini)" && \
+    test -f /home/testuser/.gemini/settings.json && \
+    echo "OK: .gemini/settings.json はアクセス可能" && \
     echo "=== 全てのシンボリックリンクが正常に作成されました ==="
 
 # === .zshrc プラットフォーム分離テスト ===
