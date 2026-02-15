@@ -62,6 +62,8 @@ RUN set -e && echo "=== シンボリックリンク検証 ===" && \
     echo "OK: .gemini -> $(readlink /home/testuser/.gemini)" && \
     test -f /home/testuser/.gemini/settings.json && \
     echo "OK: .gemini/settings.json はアクセス可能" && \
+    test -f /home/testuser/.gemini/commands/AI.toml && \
+    echo "OK: .gemini/commands/AI.toml はアクセス可能" && \
     echo "=== 全てのシンボリックリンクが正常に作成されました ==="
 
 # === .zshrc プラットフォーム分離テスト ===
