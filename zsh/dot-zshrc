@@ -162,3 +162,8 @@ fi
 if command -v direnv &> /dev/null; then
   eval "$(direnv hook zsh)"
 fi
+
+# ============================================================
+# Local Settings (machine-specific, not managed by dotfiles)
+# ============================================================
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
