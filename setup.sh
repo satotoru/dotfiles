@@ -45,6 +45,8 @@ packages=(
     "node"
     # LSP
     "lua-language-server"
+    # シンボリックリンク管理
+    "stow"
     # ユーティリティ
     "ripgrep"
     "fzf"
@@ -72,47 +74,11 @@ if [ ! -d "$DOTFILES_PATH" ]; then
     exit 1
 fi
 
-# シンボリックリンク設定
-create_symlink() {
-    local src="$1"
-    local dst="$2"
-    local dst_dir=$(dirname "$dst")
+# stow パッケージ一覧
+stow_packages=(zsh git tmux sheldon starship nvim claude gemini)
 
-    if [ ! -e "$src" ]; then
-        echo "⚠ ソースが見つかりません: $src (スキップ)"
-        return
-    fi
-
-    # ディレクトリがなければ作成
-    mkdir -p "$dst_dir"
-
-    # 既存のファイル/リンクがあれば削除
-    if [ -e "$dst" ] || [ -L "$dst" ]; then
-        echo "削除中: $dst"
-        rm -rf "$dst"
-    fi
-
-    # シンボリックリンク作成
-    ln -s "$src" "$dst"
-    echo "✓ リンク作成: $dst -> $src"
-}
-
-# リンク定義
-declare -A symlinks=(
-    ["$DOTFILES_PATH/zsh/.zshrc"]="$HOME_DIR/.zshrc"
-    ["$DOTFILES_PATH/git/.gitignore_global"]="$HOME_DIR/.gitignore_global"
-    ["$DOTFILES_PATH/git/.gitconfig"]="$HOME_DIR/.gitconfig"
-    ["$DOTFILES_PATH/tmux/.tmux.conf"]="$HOME_DIR/.tmux.conf"
-    ["$DOTFILES_PATH/sheldon/plugins.toml"]="$HOME_DIR/.config/sheldon/plugins.toml"
-    ["$DOTFILES_PATH/starship/starship.toml"]="$HOME_DIR/.config/starship.toml"
-    ["$DOTFILES_PATH/nvim"]="$HOME_DIR/.config/nvim"
-    ["$DOTFILES_PATH/claude/commands/AI.md"]="$HOME_DIR/.claude/commands/AI.md"
-)
-
-for src in "${!symlinks[@]}"; do
-    dst="${symlinks[$src]}"
-    create_symlink "$src" "$dst"
-done
+# stow でシンボリックリンクを作成
+stow --dotfiles -R -v -d "$DOTFILES_PATH" -t "$HOME_DIR" "${stow_packages[@]}"
 
 echo ""
 echo "========================================="
