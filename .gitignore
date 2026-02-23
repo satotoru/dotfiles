@@ -5,9 +5,23 @@ karabiner/automatic_backups
 *.exe
 *.swp
 
-# Claude Code - 個人設定とキャッシュファイル
+# Claude Code - 個人設定とキャッシュファイル（旧: ~/.claude全体をsymlinkしていた時代の名残）
 .claude/settings.local.json
 .claude/cache/
 .claude/logs/
 .claude/temp/
 CLAUDE.local.md
+
+# Claude Code - dot-claude内に紛れ込んだ自動生成ファイルの安全ネット
+claude/dot-claude/.credentials.json
+claude/dot-claude/backups/
+claude/dot-claude/cache/
+claude/dot-claude/debug/
+claude/dot-claude/history.jsonl
+claude/dot-claude/plans/
+claude/dot-claude/plugins/
+claude/dot-claude/projects/
+claude/dot-claude/session-env/
+claude/dot-claude/shell-snapshots/
+claude/dot-claude/tasks/
+claude/dot-claude/todos/
