@@ -66,6 +66,7 @@ return {
     end
 
     -- ターミナルバッファが開かれたときにキーマッピングを設定
-    vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+    -- fzf-luaのバッファは除外（fzfは独自のESC処理を持つ）
+    vim.cmd('autocmd! TermOpen term://*toggleterm* lua set_terminal_keymaps()')
   end,
 }
