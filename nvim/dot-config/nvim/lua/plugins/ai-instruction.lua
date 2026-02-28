@@ -2,17 +2,50 @@ return {
   "nvim-lua/plenary.nvim",
   lazy = false,
   config = function()
+    -- Claudeペインを自動検出（pane_current_commandが"claude"のものを探す）
+    local function find_claude_pane()
+      local result = vim.fn.system(
+        "tmux list-panes -a -F '#{pane_id} #{pane_current_command}'"
+      )
+      for line in result:gmatch("[^\n]+") do
+        local pane_id, cmd = line:match("(%S+)%s+(%S+)")
+        if cmd and cmd:match("claude") then
+          return pane_id
+        end
+      end
+      return nil
+    end
+
+    -- AI_INSTRUCTION.md を保存して /ai をClaudeに送信し、バッファをクリア
+    local function send_ai_instruction(buf)
+      vim.cmd("silent! write")
+
+      local pane_id = find_claude_pane()
+      if not pane_id then
+        vim.notify("Claude Codeのペインが見つかりません", vim.log.levels.WARN)
+        return
+      end
+
+      vim.fn.system("tmux send-keys -t " .. pane_id .. " '/ai' Enter")
+
+      -- バッファをクリアして保存
+      vim.api.nvim_buf_set_lines(buf, 0, -1, false, { "" })
+      vim.cmd("silent! write")
+
+      vim.notify("送信完了 → " .. pane_id, vim.log.levels.INFO)
+    end
+
     local function open_ai_instruction()
       local cwd = vim.fn.getcwd()
       local ai_file = cwd .. "/AI_INSTRUCTION.md"
 
       -- Check if file exists, create if not
       if vim.fn.filereadable(ai_file) == 0 then
-        vim.fn.writefile({""}, ai_file)
+        vim.fn.writefile({ "" }, ai_file)
       end
 
       -- Create horizontal split at bottom
-      local height = 20 -- Similar to toggleterm's default height
+      local height = 20
 
       -- Open horizontal split at bottom
       vim.cmd("botright split")
@@ -25,8 +58,7 @@ return {
       local win = vim.api.nvim_get_current_win()
 
       -- Set special UI elements for AI instruction panel
-      -- Custom status line to show this is AI instruction panel
-      vim.api.nvim_win_set_option(win, "statusline", "🤖 AI INSTRUCTION PANEL - <leader># to open | <Esc><Esc> to close")
+      vim.api.nvim_win_set_option(win, "statusline", "🤖 AI INSTRUCTION PANEL - <leader># to open | <C-s> to send | <Esc><Esc> to close")
 
       -- Set distinctive colors for the AI instruction panel
       vim.api.nvim_win_set_option(win, "winhl", "Normal:FloatBorder,NormalFloat:FloatBorder")
@@ -41,9 +73,18 @@ return {
       vim.api.nvim_win_set_option(win, "number", false)
       vim.api.nvim_win_set_option(win, "relativenumber", false)
 
-
       -- Close on <Esc><Esc>
       vim.api.nvim_buf_set_keymap(buf, "n", "<Esc><Esc>", ":q<CR>", { noremap = true, silent = true })
+
+      -- <C-s> で送信（ノーマルモード・インサートモード）
+      vim.keymap.set("n", "<C-s>", function()
+        send_ai_instruction(buf)
+      end, { buffer = buf, desc = "AI指示をClaudeに送信して内容をクリア" })
+
+      vim.keymap.set("i", "<C-s>", function()
+        vim.cmd("stopinsert")
+        send_ai_instruction(buf)
+      end, { buffer = buf, desc = "AI指示をClaudeに送信して内容をクリア" })
 
       -- AI指示バッファでのみ自動保存を有効にする
       vim.api.nvim_create_autocmd("InsertLeave", {
@@ -53,7 +94,6 @@ return {
         end,
         desc = "AI指示ファイルの自動保存"
       })
-
     end
 
     -- Set up keymap
