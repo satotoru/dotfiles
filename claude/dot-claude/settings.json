@@ -1,17 +1,4 @@
 {
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/pre-tool-use-secrets-check.sh"
-          }
-        ]
-      }
-    ]
-  },
   "enabledPlugins": {
     "lua-lsp@claude-plugins-official": true
   },

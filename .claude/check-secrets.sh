@@ -25,8 +25,17 @@ if ! echo "$CMD" | grep -qE 'git[[:space:]]+(commit|push)'; then
     exit 0
 fi
 
-# ステージングされた変更を取得
-DIFF=$(git diff --cached --unified=0 2>/dev/null || echo "")
+# commit: ステージング差分、push: 未プッシュのコミット差分を取得
+if echo "$CMD" | grep -qE 'git[[:space:]]+push'; then
+    CURRENT_BRANCH=$(git branch --show-current 2>/dev/null)
+    if git rev-parse "origin/$CURRENT_BRANCH" >/dev/null 2>&1; then
+        DIFF=$(git diff "origin/$CURRENT_BRANCH"..HEAD --unified=0 2>/dev/null || echo "")
+    else
+        DIFF=$(git diff HEAD~1 HEAD --unified=0 2>/dev/null || echo "")
+    fi
+else
+    DIFF=$(git diff --cached --unified=0 2>/dev/null || echo "")
+fi
 
 if [ -z "$DIFF" ]; then
     exit 0
