@@ -25,7 +25,10 @@ if [[ -z "$diff_target" ]]; then
 fi
 
 # 追加行（+で始まる行）のみを対象に機密情報パターンを検索
-secrets_found=$(echo "$diff_target" | grep '^+' | grep -v '^+++' | grep -iE \
+# ただし正規表現文字クラス（[0-9A-Z]等）を含む行は除外（パターン定義自体の誤検知防止）
+secrets_found=$(echo "$diff_target" | grep '^+' | grep -v '^+++' \
+  | grep -v '\[[0-9A-Za-z_-]*\]' \
+  | grep -iE \
   'AKIA[0-9A-Z]{16}|sk-[a-zA-Z0-9]{32,}|ghp_[a-zA-Z0-9]+|ghs_[a-zA-Z0-9]+|github_pat_[a-zA-Z0-9_]+|xoxb-[a-zA-Z0-9-]+|xoxp-[a-zA-Z0-9-]+|AIza[a-zA-Z0-9_-]{35}|sk-ant-[a-zA-Z0-9-]+|BEGIN (RSA |EC |DSA )?PRIVATE KEY|password\s*[:=]\s*["'"'"'][^"'"'"']{4,}["'"'"']|secret\s*[:=]\s*["'"'"'][^"'"'"']{4,}["'"'"']|token\s*[:=]\s*["'"'"'][^"'"'"']{4,}["'"'"']|mysql://[^@\s]+@|postgres://[^@\s]+@|mongodb\+?srv?://[^@\s]+@' \
   2>/dev/null)
 
