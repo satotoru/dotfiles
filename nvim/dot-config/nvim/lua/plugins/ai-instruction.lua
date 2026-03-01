@@ -16,9 +16,18 @@ return {
       return nil
     end
 
-    -- AI_INSTRUCTION.md を保存して /ai をClaudeに送信し、バッファをクリア
+    -- AI_INSTRUCTION.md の内容を tmux paste-buffer にロードし、Claude Code ペインに貼り付け
     local function send_ai_instruction(buf)
-      vim.cmd("silent! write")
+      local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+      -- 末尾の空行を削除
+      while #lines > 0 and lines[#lines]:match("^%s*$") do
+        table.remove(lines)
+      end
+
+      if #lines == 0 then
+        vim.notify("送信内容が空です", vim.log.levels.WARN)
+        return
+      end
 
       local pane_id = find_claude_pane()
       if not pane_id then
@@ -26,13 +35,24 @@ return {
         return
       end
 
-      vim.fn.system("tmux send-keys -t " .. pane_id .. " '/ai' Enter")
+      -- tmux paste-buffer にコンテンツをロード
+      local tmpfile = vim.fn.tempname()
+      vim.fn.writefile(lines, tmpfile)
+      vim.fn.system("tmux load-buffer " .. vim.fn.shellescape(tmpfile))
+      vim.fn.delete(tmpfile)
 
-      -- バッファをクリアして保存
+      -- バッファとファイルをクリアしてウィンドウを閉じる
       vim.api.nvim_buf_set_lines(buf, 0, -1, false, { "" })
       vim.cmd("silent! write")
+      vim.cmd("close")
 
-      vim.notify("送信完了 → " .. pane_id, vim.log.levels.INFO)
+      -- Claude Code ペインに貼り付け（ブラケットペーストモード）
+      vim.fn.system("tmux paste-buffer -p -t " .. vim.fn.shellescape(pane_id))
+
+      -- Claude Code ペインにフォーカスを移す
+      vim.fn.system("tmux select-pane -t " .. vim.fn.shellescape(pane_id))
+
+      vim.notify("貼り付け完了 → " .. pane_id .. "（Enter で送信）", vim.log.levels.INFO)
     end
 
     local function open_ai_instruction()
