@@ -134,6 +134,10 @@ add_warn '#\s*.*(password|api_?key|secret|token|passwd)\s*[:=]\s*\S{4,}' \
 # 結果処理
 # ============================================================
 
+if [ "$BLOCK_FOUND" -eq 0 ] && [ "$WARN_FOUND" -eq 0 ]; then
+    echo "✅ 機密情報は検出されませんでした。" >&2
+fi
+
 if [ "$BLOCK_FOUND" -eq 1 ]; then
     # 明確な機密情報 → 自動ブロック
     {
