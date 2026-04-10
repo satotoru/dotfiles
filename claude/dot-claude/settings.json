@@ -53,9 +53,115 @@
       "Read(~/.netrc)"
     ]
   },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "idle_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/claude-tmux-notify.sh idle"
+          }
+        ]
+      },
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/claude-tmux-notify.sh permission"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.tmux/plugins/tmux-agent-sidebar/hook.sh claude notification"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/claude-tmux-notify.sh active"
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.tmux/plugins/tmux-agent-sidebar/hook.sh claude user-prompt-submit"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/claude-tmux-notify.sh idle"
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.tmux/plugins/tmux-agent-sidebar/hook.sh claude stop"
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.tmux/plugins/tmux-agent-sidebar/hook.sh claude stop-failure"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.tmux/plugins/tmux-agent-sidebar/hook.sh claude session-start"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.tmux/plugins/tmux-agent-sidebar/hook.sh claude activity-log"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.tmux/plugins/tmux-agent-sidebar/hook.sh claude session-end"
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "lua-lsp@claude-plugins-official": true,
-    "dig@kuu-marketplace": true
+    "dig@kuu-marketplace": true,
+    "figma@claude-plugins-official": true,
+    "playwright@claude-plugins-official": false,
+    "Notion@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "ralph-loop@claude-plugins-official": true,
+    "ruby-lsp@claude-plugins-official": true
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "voiceEnabled": true
 }
