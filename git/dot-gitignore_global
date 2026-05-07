@@ -13,13 +13,3 @@ tags
 .generators
 AI_INSTRUCTION.md
 CLAUDE.local.md
-
-# Personal dev workflow (promote to team-wide later)
-/.claude/agents/workflow-dispatcher.md
-/.claude/agents/workflow-worker.md
-/.claude/skills/wf-poll/
-/.claude/skills/wf-focus/
-/.claude/skills/wf-unfocus/
-/.claude/skills/wf-digest-sync/
-/.claude/skills/harness-implement/
-/.claude/slack-mapping.md
