@@ -25,3 +25,7 @@ claude/dot-claude/session-env/
 claude/dot-claude/shell-snapshots/
 claude/dot-claude/tasks/
 claude/dot-claude/todos/
+
+# Claude Code - settings.json はランタイムで業務情報(社内リポ名/パス/権限)が書き戻されるため共有しない
+# 物理ファイルは残し stow で ~/.claude/settings.json に symlink するが、git管理からは除外（ローカル専用）
+claude/dot-claude/settings.json
