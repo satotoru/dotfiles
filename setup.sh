@@ -75,7 +75,7 @@ if [ ! -d "$DOTFILES_PATH" ]; then
 fi
 
 # stow パッケージ一覧
-stow_packages=(zsh git tmux sheldon starship nvim claude gemini)
+stow_packages=(zsh git tmux sheldon starship nvim gemini)
 
 # stow でシンボリックリンクを作成
 stow --dotfiles -R -v -d "$DOTFILES_PATH" -t "$HOME_DIR" "${stow_packages[@]}"

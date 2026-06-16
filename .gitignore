@@ -11,21 +11,3 @@ karabiner/automatic_backups
 .claude/logs/
 .claude/temp/
 CLAUDE.local.md
-
-# Claude Code - dot-claude内に紛れ込んだ自動生成ファイルの安全ネット
-claude/dot-claude/.credentials.json
-claude/dot-claude/backups/
-claude/dot-claude/cache/
-claude/dot-claude/debug/
-claude/dot-claude/history.jsonl
-claude/dot-claude/plans/
-claude/dot-claude/plugins/
-claude/dot-claude/projects/
-claude/dot-claude/session-env/
-claude/dot-claude/shell-snapshots/
-claude/dot-claude/tasks/
-claude/dot-claude/todos/
-
-# Claude Code - settings.json はランタイムで業務情報(社内リポ名/パス/権限)が書き戻されるため共有しない
-# 物理ファイルは残し stow で ~/.claude/settings.json に symlink するが、git管理からは除外（ローカル専用）
-claude/dot-claude/settings.json
