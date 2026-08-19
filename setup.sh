@@ -37,6 +37,7 @@ packages=(
     # エディタとターミナルマルチプレクサ
     "neovim"
     "tmux"
+    "ghostty"
     # バージョン管理
     "git"
     "ghq"
@@ -75,7 +76,7 @@ if [ ! -d "$DOTFILES_PATH" ]; then
 fi
 
 # stow パッケージ一覧
-stow_packages=(zsh git tmux sheldon starship nvim gemini)
+stow_packages=(zsh git tmux ghostty sheldon starship nvim gemini)
 
 # stow でシンボリックリンクを作成
 stow --dotfiles -R -v -d "$DOTFILES_PATH" -t "$HOME_DIR" "${stow_packages[@]}"
